@@ -28,7 +28,8 @@ The entire extension lives in `src/extension.ts`. There is no multi-file archite
 ```sh
 pnpm compile   # Compile TypeScript to out/
 pnpm watch     # Compile in watch mode
-pnpm lint      # ESLint on src/
+pnpm lint      # Biome check (lint + format) on src/
+pnpm format    # Biome format (auto-fix) on src/
 pnpm test      # Run tests (compiles + lints first)
 pnpm typecheck # Check types (Run after make changes)
 ```
