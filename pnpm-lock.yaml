@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      brace-expansion:
+        specifier: ^5.0.4
+        version: 5.0.4
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10

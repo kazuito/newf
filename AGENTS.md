@@ -26,10 +26,11 @@ The entire extension lives in `src/extension.ts`. There is no multi-file archite
 ## Key commands
 
 ```sh
-pnpm run compile   # Compile TypeScript to out/
-pnpm run watch     # Compile in watch mode
-pnpm run lint      # ESLint on src/
-pnpm run test      # Run tests (compiles + lints first)
+pnpm compile   # Compile TypeScript to out/
+pnpm watch     # Compile in watch mode
+pnpm lint      # ESLint on src/
+pnpm test      # Run tests (compiles + lints first)
+pnpm typecheck # Check types (Run after make changes)
 ```
 
 ## How the extension works
