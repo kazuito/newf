@@ -30,15 +30,30 @@ async function createFileCommand() {
   }
 
   const basePath = path.join(rootPath, selectedDir);
-  const fileNames = expandInput(input);
+
+  let fileNames: string[];
+  try {
+    fileNames = expandInput(input);
+  } catch (err) {
+    vscode.window.showErrorMessage(
+      err instanceof Error ? err.message : "Invalid input pattern.",
+    );
+    return;
+  }
 
   for (const raw of fileNames) {
-    const fullPath = await createFile(basePath, raw);
+    try {
+      const fullPath = await createFile(basePath, raw);
 
-    const doc = await vscode.workspace.openTextDocument(
-      vscode.Uri.file(fullPath),
-    );
-    await vscode.window.showTextDocument(doc);
+      const doc = await vscode.workspace.openTextDocument(
+        vscode.Uri.file(fullPath),
+      );
+      await vscode.window.showTextDocument(doc);
+    } catch (err) {
+      vscode.window.showErrorMessage(
+        `Failed to create "${raw}": ${err instanceof Error ? err.message : String(err)}`,
+      );
+    }
   }
 }
 

@@ -22,6 +22,8 @@ export function splitTopLevelCommas(input: string): string[] {
   return segments;
 }
 
+const MAX_EXPANDED_FILES = 100;
+
 export function expandInput(input: string): string[] {
   const segments = splitTopLevelCommas(input);
   const results: string[] = [];
@@ -29,6 +31,11 @@ export function expandInput(input: string): string[] {
     const trimmed = segment.trim();
     if (trimmed) {
       results.push(...expand(trimmed));
+      if (results.length > MAX_EXPANDED_FILES) {
+        throw new Error(
+          `Expansion would create more than ${MAX_EXPANDED_FILES} files. Simplify your pattern.`,
+        );
+      }
     }
   }
   return [...new Set(results)];

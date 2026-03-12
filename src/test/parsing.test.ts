@@ -63,4 +63,13 @@ suite("expandInput", () => {
     const result = expandInput("{a,b}.ts, c.ts");
     assert.deepStrictEqual(result, ["a.ts", "b.ts", "c.ts"]);
   });
+
+  test("throws when expansion exceeds 100 files", () => {
+    assert.throws(() => expandInput("{001..200}.txt"), /more than 100 files/);
+  });
+
+  test("allows expansion up to 100 files", () => {
+    const result = expandInput("{01..99}.txt");
+    assert.strictEqual(result.length, 99);
+  });
 });

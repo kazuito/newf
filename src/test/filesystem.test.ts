@@ -47,6 +47,26 @@ suite("createFile", () => {
     const fullPath = await createFile(tmpDir, "existing.txt");
     assert.strictEqual(fs.readFileSync(fullPath, "utf-8"), "content");
   });
+
+  test("rejects path traversal with ../", async () => {
+    await assert.rejects(
+      () => createFile(tmpDir, "../escape.txt"),
+      /Path traversal detected/,
+    );
+  });
+
+  test("rejects path traversal with nested ../", async () => {
+    await assert.rejects(
+      () => createFile(tmpDir, "a/../../escape.txt"),
+      /Path traversal detected/,
+    );
+  });
+
+  test("allows deeply nested paths within base", async () => {
+    const fullPath = await createFile(tmpDir, "a/b/c/d/e.txt");
+    assert.ok(fs.existsSync(fullPath));
+    assert.ok(fullPath.startsWith(tmpDir));
+  });
 });
 
 suite("getDirectories", () => {

@@ -36,7 +36,7 @@ export async function getDirectories(rootPath: string): Promise<string[]> {
     const { stdout } = await execFileAsync(
       "git",
       ["ls-files", "--others", "--cached", "--directory", "--exclude-standard"],
-      { cwd: rootPath, maxBuffer: 10 * 1024 * 1024 },
+      { cwd: rootPath, maxBuffer: 10 * 1024 * 1024, timeout: 10_000 },
     );
 
     for (const line of stdout.split("\n")) {
@@ -79,7 +79,17 @@ export async function createFile(
     fileName = fileName.slice(1);
   }
 
-  const fullPath = path.resolve(basePath, fileName);
+  const resolvedBase = path.resolve(basePath);
+  const fullPath = path.resolve(resolvedBase, fileName);
+
+  if (
+    fullPath !== resolvedBase &&
+    !fullPath.startsWith(resolvedBase + path.sep)
+  ) {
+    throw new Error(
+      `Path traversal detected: "${rawFileName}" resolves outside the base directory`,
+    );
+  }
 
   const dir = path.dirname(fullPath);
   await fs.promises.mkdir(dir, { recursive: true });
