@@ -40,19 +40,34 @@ async function createFileCommand() {
     return;
   }
 
+  const created: string[] = [];
+  const failed: string[] = [];
+
   for (const raw of fileNames) {
     try {
-      const fullPath = await createFile(basePath, raw);
-
-      const doc = await vscode.workspace.openTextDocument(
-        vscode.Uri.file(fullPath),
-      );
-      await vscode.window.showTextDocument(doc);
+      created.push(await createFile(basePath, raw));
     } catch (err) {
-      vscode.window.showErrorMessage(
-        `Failed to create "${raw}": ${err instanceof Error ? err.message : String(err)}`,
+      failed.push(
+        `"${raw}": ${err instanceof Error ? err.message : String(err)}`,
       );
     }
+  }
+
+  if (created.length === 1) {
+    const doc = await vscode.workspace.openTextDocument(
+      vscode.Uri.file(created[0]),
+    );
+    await vscode.window.showTextDocument(doc);
+  } else if (created.length > 1) {
+    const last = await vscode.workspace.openTextDocument(
+      vscode.Uri.file(created[created.length - 1]),
+    );
+    await vscode.window.showTextDocument(last);
+    vscode.window.showInformationMessage(`Created ${created.length} files.`);
+  }
+
+  for (const msg of failed) {
+    vscode.window.showErrorMessage(`Failed to create ${msg}`);
   }
 }
 
