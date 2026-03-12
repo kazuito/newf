@@ -21,8 +21,7 @@ async function createFileCommand() {
   }
 
   const input = await vscode.window.showInputBox({
-    prompt:
-      "Enter file name(s) — supports brace expansion (e.g. {a,b}.md, {01..05}.md)",
+    prompt: `Create in "${selectedDir}" — supports brace expansion (e.g. {a,b}.md, {01..05}.md)`,
     placeHolder: "file name or pattern (e.g. components/{Header,Footer}.tsx)",
   });
   if (!input) {
