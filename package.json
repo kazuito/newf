@@ -3,6 +3,22 @@
 	"displayName": "newf",
 	"description": "Create new files and folders from the command palette. Fast, with brace expansion.",
 	"version": "0.0.1",
+	"publisher": "kazuito",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/kazuito/newf"
+	},
+	"bugs": {
+		"url": "https://github.com/kazuito/newf/issues"
+	},
+	"keywords": [
+		"file",
+		"new file",
+		"create file",
+		"brace expansion",
+		"command palette"
+	],
 	"engines": {
 		"vscode": "^1.110.0"
 	},
