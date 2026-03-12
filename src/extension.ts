@@ -77,30 +77,34 @@ async function createFileCommand() {
 	}
 
 	const input = await vscode.window.showInputBox({
-		prompt: "Enter file name (e.g. hello.md, hey/hello/world.md)",
-		placeHolder: "file name or path",
+		prompt: "Enter file name(s), comma-separated (e.g. hello.md, hey/hello/world.md)",
+		placeHolder: "file name or path (comma-separated for multiple)",
 	});
 	if (!input) {
 		return;
 	}
 
-	let fileName = input;
-	if (fileName.startsWith("/")) {
-		fileName = fileName.slice(1);
-	}
-
 	const basePath = path.join(rootPath, selectedDir);
-	const fullPath = path.resolve(basePath, fileName);
+	const fileNames = input.split(",").map((s) => s.trim()).filter(Boolean);
 
-	const dir = path.dirname(fullPath);
-	await fs.promises.mkdir(dir, { recursive: true });
+	for (const raw of fileNames) {
+		let fileName = raw;
+		if (fileName.startsWith("/")) {
+			fileName = fileName.slice(1);
+		}
 
-	if (!fs.existsSync(fullPath)) {
-		await fs.promises.writeFile(fullPath, "");
+		const fullPath = path.resolve(basePath, fileName);
+
+		const dir = path.dirname(fullPath);
+		await fs.promises.mkdir(dir, { recursive: true });
+
+		if (!fs.existsSync(fullPath)) {
+			await fs.promises.writeFile(fullPath, "");
+		}
+
+		const doc = await vscode.workspace.openTextDocument(vscode.Uri.file(fullPath));
+		await vscode.window.showTextDocument(doc);
 	}
-
-	const doc = await vscode.workspace.openTextDocument(vscode.Uri.file(fullPath));
-	await vscode.window.showTextDocument(doc);
 }
 
 export function activate(context: vscode.ExtensionContext) {
