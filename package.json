@@ -1,7 +1,7 @@
 {
 	"name": "newf",
 	"displayName": "newf",
-	"description": "Create new files/folders quickly.",
+	"description": "Create new files and folders from the command palette. Fast, with brace expansion.",
 	"version": "0.0.1",
 	"engines": {
 		"vscode": "^1.110.0"
