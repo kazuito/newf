@@ -15,7 +15,8 @@
 		"commands": [
 			{
 				"command": "newf.create",
-				"title": "Create New File"
+				"title": "Create New File",
+				"category": "Newf"
 			}
 		]
 	},
