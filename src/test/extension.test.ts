@@ -9,4 +9,12 @@ suite("Extension", () => {
     const commands = await vscode.commands.getCommands(true);
     assert.ok(commands.includes("newf.create"));
   });
+
+  test("registers the newf.createAtRoot command", async () => {
+    const ext = vscode.extensions.getExtension("undefined_publisher.newf");
+    assert.ok(ext, "extension should be found");
+    await ext.activate();
+    const commands = await vscode.commands.getCommands(true);
+    assert.ok(commands.includes("newf.createAtRoot"));
+  });
 });

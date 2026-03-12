@@ -17,8 +17,22 @@
 				"command": "newf.create",
 				"title": "Create New File",
 				"category": "Newf"
+			},
+			{
+				"command": "newf.createAtRoot",
+				"title": "Create New File at Path",
+				"category": "Newf"
 			}
-		]
+		],
+		"menus": {
+			"explorer/context": [
+				{
+					"command": "newf.create",
+					"when": "explorerResourceIsFolder",
+					"group": "navigation"
+				}
+			]
+		}
 	},
 	"scripts": {
 		"vscode:prepublish": "pnpm run compile",

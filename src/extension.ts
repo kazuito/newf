@@ -3,33 +3,70 @@ import * as vscode from "vscode";
 import { createFile, getDirectories } from "./filesystem";
 import { expandInput } from "./parsing";
 
-async function createFileCommand() {
-  const workspaceFolders = vscode.workspace.workspaceFolders;
-  if (!workspaceFolders || workspaceFolders.length === 0) {
-    vscode.window.showErrorMessage("No workspace folder is open.");
-    return;
+function makeValidateInput(
+  validateInput: (value: string) =>
+    | {
+        message: string;
+        severity: vscode.InputBoxValidationSeverity;
+      }
+    | null
+    | undefined,
+) {
+  return validateInput;
+}
+
+const patternValidateInput = makeValidateInput((value: string) => {
+  if (!value.trim()) return null;
+  try {
+    const names = expandInput(value);
+    if (names.length > 1) {
+      return {
+        message: `Will create ${names.length} files`,
+        severity: vscode.InputBoxValidationSeverity.Info,
+      };
+    }
+    return null;
+  } catch (err) {
+    return {
+      message: err instanceof Error ? err.message : "Invalid pattern",
+      severity: vscode.InputBoxValidationSeverity.Error,
+    };
+  }
+});
+
+async function pickDirectory(
+  rootPath: string,
+  dirs: string[],
+): Promise<string | undefined> {
+  const items = dirs.map((d) => ({ label: d }));
+  const qp = vscode.window.createQuickPick<vscode.QuickPickItem>();
+  qp.items = items;
+  qp.placeholder = "Select a directory";
+
+  const activeEditor = vscode.window.activeTextEditor;
+  if (activeEditor) {
+    const rel = path.relative(
+      rootPath,
+      path.dirname(activeEditor.document.uri.fsPath),
+    );
+    const activeItem = items.find((i) => i.label === (rel || "."));
+    if (activeItem) qp.activeItems = [activeItem];
   }
 
-  const rootPath = workspaceFolders[0].uri.fsPath;
-
-  const dirs = await getDirectories(rootPath);
-  const selectedDir = await vscode.window.showQuickPick(dirs, {
-    placeHolder: "Select a directory",
+  qp.show();
+  return new Promise<string | undefined>((resolve) => {
+    qp.onDidAccept(() => {
+      resolve(qp.selectedItems[0]?.label);
+      qp.dispose();
+    });
+    qp.onDidHide(() => {
+      resolve(undefined);
+      qp.dispose();
+    });
   });
-  if (!selectedDir) {
-    return;
-  }
+}
 
-  const input = await vscode.window.showInputBox({
-    prompt: `Create in "${selectedDir}" — supports brace expansion (e.g. {a,b}.md, {01..05}.md)`,
-    placeHolder: "file name or pattern (e.g. components/{Header,Footer}.tsx)",
-  });
-  if (!input) {
-    return;
-  }
-
-  const basePath = path.join(rootPath, selectedDir);
-
+async function runCreate(basePath: string, input: string): Promise<void> {
   let fileNames: string[];
   try {
     fileNames = expandInput(input);
@@ -71,13 +108,64 @@ async function createFileCommand() {
   }
 }
 
-export function activate(context: vscode.ExtensionContext) {
-  const disposable = vscode.commands.registerCommand(
-    "newf.create",
-    createFileCommand,
-  );
+async function createFileCommand(contextUri?: vscode.Uri) {
+  const workspaceFolders = vscode.workspace.workspaceFolders;
+  if (!workspaceFolders || workspaceFolders.length === 0) {
+    vscode.window.showErrorMessage("No workspace folder is open.");
+    return;
+  }
 
-  context.subscriptions.push(disposable);
+  const rootPath = workspaceFolders[0].uri.fsPath;
+
+  let selectedDir: string;
+  if (contextUri) {
+    const rel = path.relative(rootPath, contextUri.fsPath);
+    selectedDir = rel || ".";
+  } else {
+    const dirs = await getDirectories(rootPath);
+    const picked = await pickDirectory(rootPath, dirs);
+    if (!picked) return;
+    selectedDir = picked;
+  }
+
+  const input = await vscode.window.showInputBox({
+    prompt: `Create in "${selectedDir}" — supports brace expansion (e.g. {a,b}.md, {01..05}.md)`,
+    placeHolder: "file name or pattern (e.g. components/{Header,Footer}.tsx)",
+    validateInput: patternValidateInput,
+  });
+  if (!input) return;
+
+  const basePath = path.join(rootPath, selectedDir);
+  await runCreate(basePath, input);
+}
+
+async function createFileAtRootCommand() {
+  const workspaceFolders = vscode.workspace.workspaceFolders;
+  if (!workspaceFolders || workspaceFolders.length === 0) {
+    vscode.window.showErrorMessage("No workspace folder is open.");
+    return;
+  }
+
+  const rootPath = workspaceFolders[0].uri.fsPath;
+
+  const input = await vscode.window.showInputBox({
+    prompt: "Path from workspace root — supports brace expansion",
+    placeHolder: "e.g. src/components/{Header,Footer}.tsx",
+    validateInput: patternValidateInput,
+  });
+  if (!input) return;
+
+  await runCreate(rootPath, input);
+}
+
+export function activate(context: vscode.ExtensionContext) {
+  context.subscriptions.push(
+    vscode.commands.registerCommand("newf.create", createFileCommand),
+    vscode.commands.registerCommand(
+      "newf.createAtRoot",
+      createFileAtRootCommand,
+    ),
+  );
 }
 
 export function deactivate() {}
