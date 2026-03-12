@@ -24,28 +24,46 @@ suite("createFile", () => {
   });
 
   test("creates a file in the base directory", async () => {
-    const fullPath = await createFile(tmpDir, "hello.txt");
-    assert.strictEqual(fullPath, path.join(tmpDir, "hello.txt"));
-    assert.ok(fs.existsSync(fullPath));
-    assert.strictEqual(fs.readFileSync(fullPath, "utf-8"), "");
+    const result = await createFile(tmpDir, "hello.txt");
+    assert.strictEqual(result.path, path.join(tmpDir, "hello.txt"));
+    assert.strictEqual(result.alreadyExisted, false);
+    assert.ok(fs.existsSync(result.path));
+    assert.strictEqual(fs.readFileSync(result.path, "utf-8"), "");
   });
 
   test("creates intermediate directories", async () => {
-    const fullPath = await createFile(tmpDir, "a/b/c.txt");
-    assert.ok(fs.existsSync(fullPath));
+    const result = await createFile(tmpDir, "a/b/c.txt");
+    assert.ok(fs.existsSync(result.path));
     assert.ok(fs.statSync(path.join(tmpDir, "a", "b")).isDirectory());
   });
 
   test("strips a leading slash", async () => {
-    const fullPath = await createFile(tmpDir, "/leading.txt");
-    assert.strictEqual(fullPath, path.join(tmpDir, "leading.txt"));
-    assert.ok(fs.existsSync(fullPath));
+    const result = await createFile(tmpDir, "/leading.txt");
+    assert.strictEqual(result.path, path.join(tmpDir, "leading.txt"));
+    assert.ok(fs.existsSync(result.path));
   });
 
   test("is idempotent when file already exists", async () => {
     fs.writeFileSync(path.join(tmpDir, "existing.txt"), "content");
-    const fullPath = await createFile(tmpDir, "existing.txt");
-    assert.strictEqual(fs.readFileSync(fullPath, "utf-8"), "content");
+    const first = await createFile(tmpDir, "new-first.txt");
+    assert.strictEqual(first.alreadyExisted, false);
+    const result = await createFile(tmpDir, "existing.txt");
+    assert.strictEqual(result.alreadyExisted, true);
+    assert.strictEqual(fs.readFileSync(result.path, "utf-8"), "content");
+  });
+
+  test("does not truncate existing file contents", async () => {
+    const filePath = path.join(tmpDir, "with-content.txt");
+    fs.writeFileSync(filePath, "important data");
+    const result = await createFile(tmpDir, "with-content.txt");
+    assert.strictEqual(result.alreadyExisted, true);
+    assert.strictEqual(fs.readFileSync(filePath, "utf-8"), "important data");
+  });
+
+  test("allows deeply nested paths within base", async () => {
+    const result = await createFile(tmpDir, "a/b/c/d/e.txt");
+    assert.ok(fs.existsSync(result.path));
+    assert.ok(result.path.startsWith(tmpDir));
   });
 
   test("rejects path traversal with ../", async () => {
@@ -60,12 +78,6 @@ suite("createFile", () => {
       () => createFile(tmpDir, "a/../../escape.txt"),
       /Path traversal detected/,
     );
-  });
-
-  test("allows deeply nested paths within base", async () => {
-    const fullPath = await createFile(tmpDir, "a/b/c/d/e.txt");
-    assert.ok(fs.existsSync(fullPath));
-    assert.ok(fullPath.startsWith(tmpDir));
   });
 });
 

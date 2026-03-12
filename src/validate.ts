@@ -1,19 +1,7 @@
 import * as vscode from "vscode";
 import { expandInput } from "./parsing";
 
-function makeValidateInput(
-  validateInput: (value: string) =>
-    | {
-        message: string;
-        severity: vscode.InputBoxValidationSeverity;
-      }
-    | null
-    | undefined,
-) {
-  return validateInput;
-}
-
-export const patternValidateInput = makeValidateInput((value: string) => {
+export const patternValidateInput = (value: string) => {
   if (!value.trim()) return null;
   try {
     const names = expandInput(value);
@@ -30,4 +18,4 @@ export const patternValidateInput = makeValidateInput((value: string) => {
       severity: vscode.InputBoxValidationSeverity.Error,
     };
   }
-});
+};
