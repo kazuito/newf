@@ -166,8 +166,8 @@ Path traversal is blocked. Inputs like `../../etc/passwd` that resolve outside t
 
 ```sh
 pnpm install
-pnpm compile      # Build
-pnpm watch        # Build in watch mode
+pnpm compile      # Bundle the extension and compile tests
+pnpm watch        # Rebuild the extension bundle in watch mode
 pnpm lint         # Lint and format check (Biome)
 pnpm test         # Compile, lint, and run tests
 pnpm typecheck    # Type check without emitting

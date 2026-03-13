@@ -93,16 +93,19 @@
     }
   },
   "scripts": {
-    "vscode:prepublish": "pnpm run compile",
-    "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
-    "pretest": "pnpm run compile && pnpm run lint",
+    "vscode:prepublish": "pnpm run bundle",
+    "bundle": "rolldown -c",
+    "compile:tests": "tsc -p ./tsconfig.test.json",
+    "compile": "pnpm run bundle && pnpm run compile:tests",
+    "watch": "rolldown -c -w",
+    "watch:tests": "tsc -watch -p ./tsconfig.test.json",
     "lint": "biome check",
     "format": "biome format --write",
     "test": "vscode-test",
     "typecheck": "tsc --noEmit",
     "extract": "vscode-l10n-dev export -o ./l10n src/**/*.ts",
-    "check": "pnpm biome check --write && pnpm compile && pnpm test",
+    "check": "pnpm biome check --write && pnpm test",
+    "pretest": "pnpm run compile",
     "prepare": "husky"
   },
   "devDependencies": {
@@ -114,6 +117,7 @@
     "@vscode/test-cli": "^0.0.12",
     "@vscode/test-electron": "^2.5.2",
     "husky": "^9.1.7",
+    "rolldown": "1.0.0-rc.9",
     "typescript": "^5.9.3"
   },
   "packageManager": "pnpm@10.32.1",

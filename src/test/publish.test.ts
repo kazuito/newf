@@ -7,17 +7,32 @@ function readProjectFile(...parts: string[]) {
 }
 
 suite("Publishing", () => {
-  test("does not exclude node_modules from the published package", () => {
+  test("excludes build-only dependencies and test output from the published package", () => {
     const vscodeIgnore = readProjectFile(".vscodeignore");
-    assert.doesNotMatch(vscodeIgnore, /^node_modules\/$/m);
+    assert.match(vscodeIgnore, /^\.env$/m);
+    assert.match(vscodeIgnore, /^\.env\.\*$/m);
+    assert.match(vscodeIgnore, /^node_modules\/$/m);
+    assert.match(vscodeIgnore, /^out-test\/$/m);
   });
 
-  test("packages and publishes with dependencies included", () => {
+  test("packages and publishes the bundle without runtime dependencies", () => {
     const publishWorkflow = readProjectFile(
       ".github",
       "workflows",
       "publish.yml",
     );
-    assert.doesNotMatch(publishWorkflow, /--no-dependencies/);
+    assert.match(publishWorkflow, /--no-dependencies/);
+  });
+
+  test("build scripts use rolldown for the extension bundle", () => {
+    const packageJson = JSON.parse(readProjectFile("package.json")) as {
+      scripts: Record<string, string>;
+    };
+
+    assert.strictEqual(packageJson.scripts.bundle, "rolldown -c");
+    assert.strictEqual(
+      packageJson.scripts.compile,
+      "pnpm run bundle && pnpm run compile:tests",
+    );
   });
 });

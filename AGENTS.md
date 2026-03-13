@@ -27,13 +27,14 @@ src/
     filesystem.test.ts
     parsing.test.ts
 out/                  — Compiled JS output (do not edit)
+out-test/             — Compiled test JS output (do not edit)
 ```
 
 ## Key commands
 
 ```sh
-pnpm compile   # Compile TypeScript to out/
-pnpm watch     # Compile in watch mode
+pnpm compile   # Bundle the extension to out/ and compile tests to out-test/
+pnpm watch     # Rebuild the extension bundle in watch mode
 pnpm lint      # Biome check (lint + format) on src/
 pnpm format    # Biome format (auto-fix) on src/
 pnpm test      # Run tests (compiles + lints first)
