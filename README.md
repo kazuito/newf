@@ -7,6 +7,8 @@
 **Create new files and folders from the command palette.** \
 Fast, minimal, with full brace expansion.
 
+[![TypeScript](https://img.shields.io/badge/TypeScript-000?style=flat-square&logo=typescript&logoColor=fff)](https://www.typescriptlang.org)
+
 ![Demo](./demo.gif)
 
 </div>
