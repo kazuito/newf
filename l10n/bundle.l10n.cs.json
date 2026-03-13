@@ -1,0 +1,23 @@
+{
+	"No workspace folder is open.": "Žádná složka pracovního prostoru není otevřena.",
+	"Select workspace root": "Vyberte kořen pracovního prostoru",
+	"Select a directory or type a new one to create": "Vyberte adresář nebo zadejte nový, který chcete vytvořit",
+	"$(plus) Create directory \"{0}\"": "$(plus) Vytvořit adresář \"{0}\"",
+	"Cannot create directory outside workspace: \"{0}\"": "Nelze vytvořit adresář mimo pracovní prostor: \"{0}\"",
+	"Failed to create directory: {0}": "Vytvoření adresáře se nezdařilo: {0}",
+	"Create in \"{0}\" — supports brace expansion (e.g. {{a,b}}.md, {{01..05}}.md)": "Vytvořit v \"{0}\" — podporuje rozvinutí složených závorek (např. {{a,b}}.md, {{01..05}}.md)",
+	"file name or pattern (e.g. components/{{Header,Footer}}.tsx)": "název souboru nebo vzor (např. components/{{Header,Footer}}.tsx)",
+	"Path from workspace root — supports brace expansion": "Cesta od kořene pracovního prostoru — podporuje rozvinutí složených závorek",
+	"e.g. src/components/{{Header,Footer}}.tsx": "např. src/components/{{Header,Footer}}.tsx",
+	"Will create {0} files: {1}{2}": "Bude vytvořeno {0} souborů: {1}{2}",
+	"(+{0} more)": "(+{0} dalších)",
+	"1 file already existed and was not modified: {0}": "1 soubor již existoval a nebyl upraven: {0}",
+	"{0} files already existed and were not modified: {1}": "{0} souborů již existovalo a nebyly upraveny: {1}",
+	"Created {0}": "{0} vytvořeno",
+	"Created {0} files": "Vytvořeno {0} souborů",
+	"1 folder": "1 složka",
+	"{0} folders": "{0} složek",
+	"{0}, {1}": "{0}, {1}",
+	"Undo": "Zpět",
+	"Failed to create {0}": "Vytvoření {0} se nezdařilo"
+}

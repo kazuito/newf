@@ -1,0 +1,23 @@
+{
+	"No workspace folder is open.": "لم يتم فتح أي مجلد لمساحة العمل.",
+	"Select workspace root": "تحديد جذر مساحة العمل",
+	"Select a directory or type a new one to create": "تحديد دليل أو كتابة دليل جديد لإنشائه",
+	"$(plus) Create directory \"{0}\"": "$(plus) إنشاء الدليل \"{0}\"",
+	"Cannot create directory outside workspace: \"{0}\"": "لا يمكن إنشاء دليل خارج مساحة العمل: \"{0}\"",
+	"Failed to create directory: {0}": "فشل إنشاء الدليل: {0}",
+	"Create in \"{0}\" — supports brace expansion (e.g. {{a,b}}.md, {{01..05}}.md)": "الإنشاء في \"{0}\" — يدعم توسع الأقواس المعقوفة (مثال: {{a,b}}.md, {{01..05}}.md)",
+	"file name or pattern (e.g. components/{{Header,Footer}}.tsx)": "اسم الملف أو النمط (مثال: components/{{Header,Footer}}.tsx)",
+	"Path from workspace root — supports brace expansion": "المسار من جذر مساحة العمل — يدعم توسع الأقواس المعقوفة",
+	"e.g. src/components/{{Header,Footer}}.tsx": "مثال: src/components/{{Header,Footer}}.tsx",
+	"Will create {0} files: {1}{2}": "سيتم إنشاء {0} ملفات: {1}{2}",
+	"(+{0} more)": "(+{0} أكثر)",
+	"1 file already existed and was not modified: {0}": "ملف واحد كان موجوداً بالفعل ولم يتم تعديله: {0}",
+	"{0} files already existed and were not modified: {1}": "{0} ملفات كانت موجودة بالفعل ولم يتم تعديلها: {1}",
+	"Created {0}": "تم إنشاء {0}",
+	"Created {0} files": "تم إنشاء {0} ملفات",
+	"1 folder": "مجلد واحد",
+	"{0} folders": "{0} مجلدات",
+	"{0}, {1}": "{0}، {1}",
+	"Undo": "تراجع",
+	"Failed to create {0}": "فشل إنشاء {0}"
+}

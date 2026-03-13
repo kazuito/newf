@@ -1,0 +1,23 @@
+{
+	"No workspace folder is open.": "Açık çalışma alanı klasörü yok.",
+	"Select workspace root": "Çalışma alanı kökünü seçin",
+	"Select a directory or type a new one to create": "Bir dizin seçin veya oluşturmak için yeni bir tane girin",
+	"$(plus) Create directory \"{0}\"": "$(plus) \"{0}\" dizinini oluştur",
+	"Cannot create directory outside workspace: \"{0}\"": "Çalışma alanı dışında dizin oluşturulamaz: \"{0}\"",
+	"Failed to create directory: {0}": "Dizin oluşturulamadı: {0}",
+	"Create in \"{0}\" — supports brace expansion (e.g. {{a,b}}.md, {{01..05}}.md)": "\"{0}\" konumunda oluştur — küme ayracı genişletmeyi destekler (örn. {{a,b}}.md, {{01..05}}.md)",
+	"file name or pattern (e.g. components/{{Header,Footer}}.tsx)": "dosya adı veya desen (örn. components/{{Header,Footer}}.tsx)",
+	"Path from workspace root — supports brace expansion": "Çalışma alanı kökünden yol — küme ayracı genişletmeyi destekler",
+	"e.g. src/components/{{Header,Footer}}.tsx": "örn. src/components/{{Header,Footer}}.tsx",
+	"Will create {0} files: {1}{2}": "{0} dosya oluşturulacak: {1}{2}",
+	"(+{0} more)": "(+{0} daha)",
+	"1 file already existed and was not modified: {0}": "1 dosya zaten vardı ve değiştirilmedi: {0}",
+	"{0} files already existed and were not modified: {1}": "{0} dosya zaten vardı ve değiştirilmedi: {1}",
+	"Created {0}": "{0} oluşturuldu",
+	"Created {0} files": "{0} dosya oluşturuldu",
+	"1 folder": "1 klasör",
+	"{0} folders": "{0} klasör",
+	"{0}, {1}": "{0}, {1}",
+	"Undo": "Geri Al",
+	"Failed to create {0}": "{0} oluşturulamadı"
+}

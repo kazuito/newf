@@ -1,0 +1,9 @@
+{
+	"command.newFile.title": "Criar novo arquivo",
+	"command.newFileAtRoot.title": "Criar novo arquivo no caminho",
+	"config.templates.description": "Mapeia padrões glob simples para o conteúdo inicial do arquivo. Use ${name} para o nome base sem extensão. Padrões sem `/` correspondem apenas ao nome base; padrões com `/` correspondem ao caminho relativo ao workspace. O primeiro padrão correspondente vence. Suporta `*` (dentro de um segmento de caminho) e `**` (entre segmentos).",
+	"config.openAfterCreate.description": "Quais arquivos abrir no editor após a criação.",
+	"config.openAfterCreate.last": "Abrir o último arquivo criado",
+	"config.openAfterCreate.all": "Abrir todos os arquivos criados",
+	"config.openAfterCreate.none": "Não abrir nenhum arquivo"
+}

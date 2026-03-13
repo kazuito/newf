@@ -7,9 +7,17 @@ export const patternValidateInput = (value: string) => {
     const names = expandInput(value);
     if (names.length > 1) {
       const preview = names.slice(0, 5).join(", ");
-      const suffix = names.length > 5 ? ` (+${names.length - 5} more)` : "";
+      const suffix =
+        names.length > 5
+          ? ` ${vscode.l10n.t("(+{0} more)", names.length - 5)}`
+          : "";
       return {
-        message: `Will create ${names.length} files: ${preview}${suffix}`,
+        message: vscode.l10n.t(
+          "Will create {0} files: {1}{2}",
+          names.length,
+          preview,
+          suffix,
+        ),
         severity: vscode.InputBoxValidationSeverity.Info,
       };
     }

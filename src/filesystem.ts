@@ -73,6 +73,7 @@ export async function getDirectories(rootPath: string): Promise<string[]> {
 export async function createFile(
   basePath: string,
   rawFileName: string,
+  content = "",
 ): Promise<{ path: string; alreadyExisted: boolean; isDirectory: boolean }> {
   const isDirectoryIntent =
     rawFileName.endsWith("/") || rawFileName.endsWith(path.sep);
@@ -113,7 +114,7 @@ export async function createFile(
   await fs.promises.mkdir(dir, { recursive: true });
 
   try {
-    await fs.promises.writeFile(fullPath, "", { flag: "wx" });
+    await fs.promises.writeFile(fullPath, content, { flag: "wx" });
     return { path: fullPath, alreadyExisted: false, isDirectory: false };
   } catch (err) {
     if (

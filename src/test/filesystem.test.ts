@@ -115,6 +115,28 @@ suite("createFile", () => {
     assert.strictEqual(result.isDirectory, true);
     assert.strictEqual(result.alreadyExisted, false);
   });
+
+  test("writes provided content into a newly created file", async () => {
+    const result = await createFile(tmpDir, "templated.ts", "// hello\n");
+    assert.strictEqual(result.alreadyExisted, false);
+    assert.strictEqual(fs.readFileSync(result.path, "utf-8"), "// hello\n");
+  });
+
+  test("does not overwrite content when file already exists", async () => {
+    fs.writeFileSync(path.join(tmpDir, "existing.ts"), "original content");
+    const result = await createFile(tmpDir, "existing.ts", "new content");
+    assert.strictEqual(result.alreadyExisted, true);
+    assert.strictEqual(
+      fs.readFileSync(result.path, "utf-8"),
+      "original content",
+    );
+  });
+
+  test("ignores content for directory intent", async () => {
+    const result = await createFile(tmpDir, "mydir/", "should be ignored");
+    assert.strictEqual(result.isDirectory, true);
+    assert.ok(fs.statSync(result.path).isDirectory());
+  });
 });
 
 suite("getDirectories", () => {

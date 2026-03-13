@@ -28,16 +28,17 @@
 	],
 	"activationEvents": [],
 	"main": "./out/extension.js",
+	"l10n": "./l10n",
 	"contributes": {
 		"commands": [
 			{
 				"command": "newf.newFile",
-				"title": "Create New File",
+				"title": "%command.newFile.title%",
 				"category": "Newf"
 			},
 			{
 				"command": "newf.newFileAtRoot",
-				"title": "Create New File at Path",
+				"title": "%command.newFileAtRoot.title%",
 				"category": "Newf"
 			}
 		],
@@ -58,16 +59,25 @@
 		"configuration": {
 			"title": "Newf",
 			"properties": {
+				"newf.templates": {
+					"type": "object",
+					"scope": "resource",
+					"default": {},
+					"description": "%config.templates.description%",
+					"additionalProperties": {
+						"type": "string"
+					}
+				},
 				"newf.openAfterCreate": {
 					"type": "string",
 					"enum": ["last", "all", "none"],
 					"enumDescriptions": [
-						"Open the last created file",
-						"Open all created files",
-						"Do not open any files"
+						"%config.openAfterCreate.last%",
+						"%config.openAfterCreate.all%",
+						"%config.openAfterCreate.none%"
 					],
 					"default": "last",
-					"description": "Which files to open in the editor after creation."
+					"description": "%config.openAfterCreate.description%"
 				}
 			}
 		}
@@ -82,6 +92,7 @@
 		"check": "biome check --write",
 		"test": "vscode-test",
 		"typecheck": "tsc --noEmit",
+		"extract": "vscode-l10n-dev export -o ./l10n src/**/*.ts",
 		"prepare": "husky"
 	},
 	"devDependencies": {
@@ -89,6 +100,7 @@
 		"@types/mocha": "^10.0.10",
 		"@types/node": "22.x",
 		"@types/vscode": "^1.100.0",
+		"@vscode/l10n-dev": "^0.0.35",
 		"@vscode/test-cli": "^0.0.12",
 		"@vscode/test-electron": "^2.5.2",
 		"husky": "^9.1.7",

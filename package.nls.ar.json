@@ -1,0 +1,9 @@
+{
+	"command.newFile.title": "إنشاء ملف جديد",
+	"command.newFileAtRoot.title": "إنشاء ملف جديد في المسار",
+	"config.templates.description": "يُعيّن أنماط glob البسيطة إلى محتوى الملف الأولي. استخدم ${name} للجذع (الاسم الأساسي بدون امتداد). الأنماط بدون `/` تُطابق الاسم الأساسي فقط؛ الأنماط بـ `/` تُطابق المسار النسبي لمساحة العمل. يفوز أول نمط مطابق. يدعم `*` (داخل مقطع مسار واحد) و`**` (عبر المقاطع).",
+	"config.openAfterCreate.description": "الملفات التي يجب فتحها في المحرر بعد الإنشاء.",
+	"config.openAfterCreate.last": "فتح آخر ملف تم إنشاؤه",
+	"config.openAfterCreate.all": "فتح كل الملفات التي تم إنشاؤها",
+	"config.openAfterCreate.none": "عدم فتح أي ملفات"
+}

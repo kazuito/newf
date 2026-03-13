@@ -1,0 +1,23 @@
+{
+	"No workspace folder is open.": "Nenhuma pasta do workspace está aberta.",
+	"Select workspace root": "Selecionar raiz do workspace",
+	"Select a directory or type a new one to create": "Selecionar um diretório ou digitar um novo para criar",
+	"$(plus) Create directory \"{0}\"": "$(plus) Criar diretório \"{0}\"",
+	"Cannot create directory outside workspace: \"{0}\"": "Não é possível criar um diretório fora do workspace: \"{0}\"",
+	"Failed to create directory: {0}": "Falha ao criar o diretório: {0}",
+	"Create in \"{0}\" — supports brace expansion (e.g. {{a,b}}.md, {{01..05}}.md)": "Criar em \"{0}\" — suporta expansão de chaves (ex. {{a,b}}.md, {{01..05}}.md)",
+	"file name or pattern (e.g. components/{{Header,Footer}}.tsx)": "nome do arquivo ou padrão (ex. components/{{Header,Footer}}.tsx)",
+	"Path from workspace root — supports brace expansion": "Caminho a partir da raiz do workspace — suporta expansão de chaves",
+	"e.g. src/components/{{Header,Footer}}.tsx": "ex. src/components/{{Header,Footer}}.tsx",
+	"Will create {0} files: {1}{2}": "Serão criados {0} arquivos: {1}{2}",
+	"(+{0} more)": "(+{0} mais)",
+	"1 file already existed and was not modified: {0}": "1 arquivo já existia e não foi modificado: {0}",
+	"{0} files already existed and were not modified: {1}": "{0} arquivos já existiam e não foram modificados: {1}",
+	"Created {0}": "{0} criado",
+	"Created {0} files": "{0} arquivos criados",
+	"1 folder": "1 pasta",
+	"{0} folders": "{0} pastas",
+	"{0}, {1}": "{0}, {1}",
+	"Undo": "Desfazer",
+	"Failed to create {0}": "Falha ao criar {0}"
+}

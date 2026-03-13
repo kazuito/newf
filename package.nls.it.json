@@ -1,0 +1,9 @@
+{
+	"command.newFile.title": "Crea nuovo file",
+	"command.newFileAtRoot.title": "Crea nuovo file dal percorso",
+	"config.templates.description": "Associa pattern glob semplici al contenuto iniziale del file. Usa ${name} per il nome del file senza estensione. I pattern senza `/` corrispondono solo al nome base; i pattern con `/` corrispondono al percorso relativo al workspace. Vince il primo pattern corrispondente. Supporta `*` (all'interno di un segmento di percorso) e `**` (tra i segmenti).",
+	"config.openAfterCreate.description": "Quali file aprire nell'editor dopo la creazione.",
+	"config.openAfterCreate.last": "Apri l'ultimo file creato",
+	"config.openAfterCreate.all": "Apri tutti i file creati",
+	"config.openAfterCreate.none": "Non aprire nessun file"
+}

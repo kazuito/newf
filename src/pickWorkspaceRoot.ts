@@ -3,7 +3,9 @@ import * as vscode from "vscode";
 export async function pickWorkspaceRoot(): Promise<string | undefined> {
   const folders = vscode.workspace.workspaceFolders;
   if (!folders || folders.length === 0) {
-    vscode.window.showErrorMessage("No workspace folder is open.");
+    vscode.window.showErrorMessage(
+      vscode.l10n.t("No workspace folder is open."),
+    );
     return undefined;
   }
   if (folders.length === 1) return folders[0].uri.fsPath;
@@ -14,7 +16,7 @@ export async function pickWorkspaceRoot(): Promise<string | undefined> {
       description: f.uri.fsPath,
       fsPath: f.uri.fsPath,
     })),
-    { placeHolder: "Select workspace root" },
+    { placeHolder: vscode.l10n.t("Select workspace root") },
   );
   return picked?.fsPath;
 }

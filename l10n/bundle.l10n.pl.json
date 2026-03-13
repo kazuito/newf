@@ -1,0 +1,23 @@
+{
+	"No workspace folder is open.": "Żaden folder obszaru roboczego nie jest otwarty.",
+	"Select workspace root": "Wybierz katalog główny obszaru roboczego",
+	"Select a directory or type a new one to create": "Wybierz katalog lub wpisz nowy do utworzenia",
+	"$(plus) Create directory \"{0}\"": "$(plus) Utwórz katalog \"{0}\"",
+	"Cannot create directory outside workspace: \"{0}\"": "Nie można utworzyć katalogu poza obszarem roboczym: \"{0}\"",
+	"Failed to create directory: {0}": "Nie udało się utworzyć katalogu: {0}",
+	"Create in \"{0}\" — supports brace expansion (e.g. {{a,b}}.md, {{01..05}}.md)": "Utwórz w \"{0}\" — obsługuje rozwijanie nawiasów klamrowych (np. {{a,b}}.md, {{01..05}}.md)",
+	"file name or pattern (e.g. components/{{Header,Footer}}.tsx)": "nazwa pliku lub wzorzec (np. components/{{Header,Footer}}.tsx)",
+	"Path from workspace root — supports brace expansion": "Ścieżka od katalogu głównego obszaru roboczego — obsługuje rozwijanie nawiasów klamrowych",
+	"e.g. src/components/{{Header,Footer}}.tsx": "np. src/components/{{Header,Footer}}.tsx",
+	"Will create {0} files: {1}{2}": "Zostanie utworzonych {0} pliki(-ów): {1}{2}",
+	"(+{0} more)": "(+{0} więcej)",
+	"1 file already existed and was not modified: {0}": "1 plik już istniał i nie został zmodyfikowany: {0}",
+	"{0} files already existed and were not modified: {1}": "{0} pliki(-ów) już istniały i nie zostały zmodyfikowane: {1}",
+	"Created {0}": "{0} utworzono",
+	"Created {0} files": "Utworzono {0} pliki(-ów)",
+	"1 folder": "1 folder",
+	"{0} folders": "{0} folderów",
+	"{0}, {1}": "{0}, {1}",
+	"Undo": "Cofnij",
+	"Failed to create {0}": "Nie udało się utworzyć {0}"
+}

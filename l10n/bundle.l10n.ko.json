@@ -1,0 +1,23 @@
+{
+	"No workspace folder is open.": "열린 워크스페이스 폴더가 없습니다.",
+	"Select workspace root": "워크스페이스 루트 선택",
+	"Select a directory or type a new one to create": "디렉터리를 선택하거나 새로 만들 디렉터리를 입력하세요",
+	"$(plus) Create directory \"{0}\"": "$(plus) 디렉터리 \"{0}\" 만들기",
+	"Cannot create directory outside workspace: \"{0}\"": "워크스페이스 외부에 디렉터리를 만들 수 없습니다: \"{0}\"",
+	"Failed to create directory: {0}": "디렉터리를 만들지 못했습니다: {0}",
+	"Create in \"{0}\" — supports brace expansion (e.g. {{a,b}}.md, {{01..05}}.md)": "\"{0}\"에 만들기 — 중괄호 확장 지원 (예: {{a,b}}.md, {{01..05}}.md)",
+	"file name or pattern (e.g. components/{{Header,Footer}}.tsx)": "파일 이름 또는 패턴 (예: components/{{Header,Footer}}.tsx)",
+	"Path from workspace root — supports brace expansion": "워크스페이스 루트에서의 경로 — 중괄호 확장 지원",
+	"e.g. src/components/{{Header,Footer}}.tsx": "예: src/components/{{Header,Footer}}.tsx",
+	"Will create {0} files: {1}{2}": "{0}개의 파일이 생성됩니다: {1}{2}",
+	"(+{0} more)": "(+{0}개 더)",
+	"1 file already existed and was not modified: {0}": "파일 1개가 이미 존재하여 수정되지 않았습니다: {0}",
+	"{0} files already existed and were not modified: {1}": "파일 {0}개가 이미 존재하여 수정되지 않았습니다: {1}",
+	"Created {0}": "{0} 만들기 완료",
+	"Created {0} files": "파일 {0}개 만들기 완료",
+	"1 folder": "폴더 1개",
+	"{0} folders": "폴더 {0}개",
+	"{0}, {1}": "{0}, {1}",
+	"Undo": "실행 취소",
+	"Failed to create {0}": "{0} 만들기 실패"
+}

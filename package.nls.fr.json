@@ -1,0 +1,9 @@
+{
+	"command.newFile.title": "Créer un nouveau fichier",
+	"command.newFileAtRoot.title": "Créer un nouveau fichier à partir d'un chemin",
+	"config.templates.description": "Associe des motifs glob simples au contenu initial du fichier. Utilisez ${name} pour le nom de base sans extension. Les motifs sans `/` correspondent uniquement au nom de base ; les motifs avec `/` correspondent au chemin relatif au workspace. Le premier motif correspondant l'emporte. Prend en charge `*` (dans un segment de chemin) et `**` (entre les segments).",
+	"config.openAfterCreate.description": "Fichiers à ouvrir dans l'éditeur après la création.",
+	"config.openAfterCreate.last": "Ouvrir le dernier fichier créé",
+	"config.openAfterCreate.all": "Ouvrir tous les fichiers créés",
+	"config.openAfterCreate.none": "Ne pas ouvrir de fichiers"
+}

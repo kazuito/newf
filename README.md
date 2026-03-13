@@ -83,6 +83,29 @@ README.md, LICENSE, src/index.ts
 
 There is a safety limit of 100 expanded files per command.
 
+## File Templates
+
+Automatically seed new files with starter content using the `newf.templates` setting. Map simple glob patterns to template strings — `${name}` expands to the file's stem (basename without extension).
+
+```json
+"newf.templates": {
+  "*.tsx": "export default function ${name}() {\n  return <div />;\n}\n",
+  "*.test.ts": "import { describe, it } from 'node:test';\n\n",
+  "src/**/*.ts": "// ${name}\n"
+}
+```
+
+**Matching rules:**
+- Patterns without `/` match the basename only (e.g. `*.tsx`)
+- Patterns with `/` match the workspace-relative path (e.g. `src/**/*.ts`)
+- Supports `*` (within one path segment) and `**` (across segments)
+- First matching pattern wins
+- Existing files are never overwritten regardless of templates
+
+## Directory Creation
+
+In the directory picker, type a path that doesn't exist yet to get a **Create directory** option at the top of the list. Accepting it creates the directory and proceeds directly to the filename input — no need to leave the flow.
+
 ## Directory Listing
 
 The quick pick menu shows all directories in your workspace. In git repositories, it uses `git ls-files` to respect your `.gitignore`. Non-git projects fall back to a filesystem walk that excludes hidden directories and `node_modules`.
