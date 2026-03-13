@@ -28,7 +28,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
 
       - name: Lint & Type check
-        run: pnpm lint & pnpm typecheck & wait
+        run: pnpm lint && pnpm typecheck
 
       - name: Compile
         run: pnpm compile
