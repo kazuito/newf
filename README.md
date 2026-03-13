@@ -1,8 +1,15 @@
+<div align="center">
+
+<img src="./icon.png" width="96" alt="newf icon" />
+
 # Newf
 
-Create new files and folders from the command palette. Fast, with brace expansion.
+**Create new files and folders from the command palette.** \
+Fast, minimal, with full brace expansion.
 
 ![Demo](./demo.gif)
+
+</div>
 
 ## Installation
 
