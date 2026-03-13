@@ -1,13 +1,15 @@
 <div align="center">
 
-<img src="./icon.png" width="96" alt="newf icon" />
+<img src="./icon.png" width="96" alt="Newf icon" />
 
 # Newf
 
 **Create new files and folders from the command palette.** \
 Fast, minimal, with full brace expansion.
 
-[![TypeScript](https://img.shields.io/badge/TypeScript-000?style=flat-square&logo=typescript&logoColor=fff)](https://www.typescriptlang.org)
+[![Install on VSCode](https://img.shields.io/visual-studio-marketplace/i/kazuito.newf?style=for-the-badge&label=Install%20on%20VSCode&labelColor=000&color=000)](https://marketplace.visualstudio.com/items?itemName=kazuito.newf)
+&nbsp;
+[![GitHub Repo stars](https://img.shields.io/github/stars/kazuito/newf?style=for-the-badge&logo=github&labelColor=000&color=000)](https://github.com/kazuito/newf)
 
 ![Demo](./demo.gif)
 
@@ -15,10 +17,18 @@ Fast, minimal, with full brace expansion.
 
 ## Installation
 
+### Click to install
+
+[![Open in VSCode](https://img.shields.io/badge/Open%20in%20VSCode-0078D4?style=for-the-badge&logo=download)](vscode:extension/kazuito.newf)
+&nbsp;
+[![Visit Visual Studio Marketplace](https://img.shields.io/badge/Visit%20Marketplace-000?style=for-the-badge)](https://marketplace.visualstudio.com/items?itemName=kazuito.newf)
+
+### Manual install
+
 Search for **newf** in the VS Code extension marketplace, or install from the command line:
 
 ```sh
-code --install-extension newf
+code --install-extension kazuito.newf
 ```
 
 ## Usage
