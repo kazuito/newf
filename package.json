@@ -47,8 +47,29 @@
 					"command": "newf.newFile",
 					"when": "explorerResourceIsFolder",
 					"group": "navigation"
+				},
+				{
+					"command": "newf.newFile",
+					"when": "!explorerResourceIsFolder",
+					"group": "navigation"
 				}
 			]
+		},
+		"configuration": {
+			"title": "Newf",
+			"properties": {
+				"newf.openAfterCreate": {
+					"type": "string",
+					"enum": ["last", "all", "none"],
+					"enumDescriptions": [
+						"Open the last created file",
+						"Open all created files",
+						"Do not open any files"
+					],
+					"default": "last",
+					"description": "Which files to open in the editor after creation."
+				}
+			}
 		}
 	},
 	"scripts": {

@@ -34,13 +34,18 @@ export async function runCreate(
   }
 
   const created: string[] = [];
+  const createdDirs: string[] = [];
   const skipped: Array<{ path: string; raw: string }> = [];
   const failed: string[] = [];
 
   for (const raw of fileNames) {
     try {
       const result = await createFile(basePath, raw);
-      if (result.alreadyExisted) {
+      if (result.isDirectory) {
+        if (!result.alreadyExisted) {
+          createdDirs.push(result.path);
+        }
+      } else if (result.alreadyExisted) {
         skipped.push({ path: result.path, raw });
       } else {
         created.push(result.path);
@@ -52,13 +57,23 @@ export async function runCreate(
     }
   }
 
-  const toOpen = selectOpenTarget(created, skipped);
+  const openBehavior = vscode.workspace
+    .getConfiguration("newf")
+    .get<string>("openAfterCreate", "last");
 
-  if (toOpen) {
-    const doc = await vscode.workspace.openTextDocument(
-      vscode.Uri.file(toOpen),
-    );
-    await vscode.window.showTextDocument(doc);
+  if (openBehavior === "last") {
+    const toOpen = selectOpenTarget(created, skipped);
+    if (toOpen) {
+      const doc = await vscode.workspace.openTextDocument(
+        vscode.Uri.file(toOpen),
+      );
+      await vscode.window.showTextDocument(doc);
+    }
+  } else if (openBehavior === "all") {
+    for (const p of created) {
+      const doc = await vscode.workspace.openTextDocument(vscode.Uri.file(p));
+      await vscode.window.showTextDocument(doc, { preview: false });
+    }
   }
 
   if (skipped.length > 0) {
@@ -68,11 +83,19 @@ export async function runCreate(
     );
   }
 
-  if (created.length > 0) {
-    const label =
-      created.length === 1
-        ? `Created ${path.basename(created[0])}`
-        : `Created ${created.length} files`;
+  if (created.length > 0 || createdDirs.length > 0) {
+    const parts: string[] = [];
+    if (created.length === 1) {
+      parts.push(`Created ${path.basename(created[0])}`);
+    } else if (created.length > 1) {
+      parts.push(`Created ${created.length} files`);
+    }
+    if (createdDirs.length === 1) {
+      parts.push(`1 folder`);
+    } else if (createdDirs.length > 1) {
+      parts.push(`${createdDirs.length} folders`);
+    }
+    const label = parts.join(", ");
     const action = await vscode.window.showInformationMessage(label, "Undo");
     if (action === "Undo") {
       for (const p of created) {

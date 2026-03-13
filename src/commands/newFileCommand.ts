@@ -1,6 +1,7 @@
 import * as path from "node:path";
 import * as vscode from "vscode";
 import { getDirectories } from "../filesystem";
+import { pickWorkspaceRoot } from "../pickWorkspaceRoot";
 import { runCreate } from "../runCreate";
 import { patternValidateInput } from "../validate";
 
@@ -37,17 +38,17 @@ async function pickDirectory(
 }
 
 export async function newFileCommand(contextUri?: vscode.Uri) {
-  const workspaceFolders = vscode.workspace.workspaceFolders;
-  if (!workspaceFolders || workspaceFolders.length === 0) {
-    vscode.window.showErrorMessage("No workspace folder is open.");
-    return;
-  }
-
-  const rootPath = workspaceFolders[0].uri.fsPath;
+  const rootPath = await pickWorkspaceRoot();
+  if (!rootPath) return;
 
   let selectedDir: string;
   if (contextUri) {
-    const rel = path.relative(rootPath, contextUri.fsPath);
+    const stat = await vscode.workspace.fs.stat(contextUri);
+    const isDir = (stat.type & vscode.FileType.Directory) !== 0;
+    const targetPath = isDir
+      ? contextUri.fsPath
+      : path.dirname(contextUri.fsPath);
+    const rel = path.relative(rootPath, targetPath);
     selectedDir = rel || ".";
   } else {
     const dirs = await getDirectories(rootPath);

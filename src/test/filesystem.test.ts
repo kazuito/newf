@@ -79,6 +79,42 @@ suite("createFile", () => {
       /Path traversal detected/,
     );
   });
+
+  test("returns isDirectory: false for regular file creation", async () => {
+    const result = await createFile(tmpDir, "plain.txt");
+    assert.strictEqual(result.isDirectory, false);
+  });
+
+  test("creates a directory when name ends with /", async () => {
+    const result = await createFile(tmpDir, "mydir/");
+    assert.strictEqual(result.isDirectory, true);
+    assert.strictEqual(result.alreadyExisted, false);
+    assert.ok(fs.statSync(result.path).isDirectory());
+  });
+
+  test("directory intent: path resolves without trailing slash", async () => {
+    const result = await createFile(tmpDir, "utils/");
+    assert.strictEqual(result.path, path.join(tmpDir, "utils"));
+  });
+
+  test("directory intent: creates intermediate segments", async () => {
+    const result = await createFile(tmpDir, "a/b/c/");
+    assert.ok(fs.statSync(result.path).isDirectory());
+    assert.strictEqual(result.path, path.join(tmpDir, "a", "b", "c"));
+  });
+
+  test("directory intent: alreadyExisted is true when dir exists", async () => {
+    fs.mkdirSync(path.join(tmpDir, "existing-dir"));
+    const result = await createFile(tmpDir, "existing-dir/");
+    assert.strictEqual(result.isDirectory, true);
+    assert.strictEqual(result.alreadyExisted, true);
+  });
+
+  test("directory intent: alreadyExisted is false for new dir", async () => {
+    const result = await createFile(tmpDir, "brand-new/");
+    assert.strictEqual(result.isDirectory, true);
+    assert.strictEqual(result.alreadyExisted, false);
+  });
 });
 
 suite("getDirectories", () => {

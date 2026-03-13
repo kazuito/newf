@@ -73,10 +73,16 @@ export async function getDirectories(rootPath: string): Promise<string[]> {
 export async function createFile(
   basePath: string,
   rawFileName: string,
-): Promise<{ path: string; alreadyExisted: boolean }> {
+): Promise<{ path: string; alreadyExisted: boolean; isDirectory: boolean }> {
+  const isDirectoryIntent =
+    rawFileName.endsWith("/") || rawFileName.endsWith(path.sep);
+
   let fileName = rawFileName;
   if (fileName.startsWith("/")) {
     fileName = fileName.slice(1);
+  }
+  if (isDirectoryIntent) {
+    fileName = fileName.replace(/[/\\]+$/, "");
   }
 
   const resolvedBase = path.resolve(basePath);
@@ -91,12 +97,24 @@ export async function createFile(
     );
   }
 
+  if (isDirectoryIntent) {
+    let alreadyExisted = false;
+    try {
+      await fs.promises.access(fullPath);
+      alreadyExisted = true;
+    } catch {
+      // doesn't exist yet
+    }
+    await fs.promises.mkdir(fullPath, { recursive: true });
+    return { path: fullPath, alreadyExisted, isDirectory: true };
+  }
+
   const dir = path.dirname(fullPath);
   await fs.promises.mkdir(dir, { recursive: true });
 
   try {
     await fs.promises.writeFile(fullPath, "", { flag: "wx" });
-    return { path: fullPath, alreadyExisted: false };
+    return { path: fullPath, alreadyExisted: false, isDirectory: false };
   } catch (err) {
     if (
       err &&
@@ -104,7 +122,7 @@ export async function createFile(
       "code" in err &&
       err.code === "EEXIST"
     ) {
-      return { path: fullPath, alreadyExisted: true };
+      return { path: fullPath, alreadyExisted: true, isDirectory: false };
     }
     throw err;
   }
