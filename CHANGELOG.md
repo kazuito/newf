@@ -4,6 +4,19 @@ All notable changes to the "newf" extension will be documented in this file.
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.0.4] - 2026-03-14
+
+### Changed
+
+- Bundle the extension with Rolldown before publishing and compile tests into `out-test/`
+- Move bundled runtime dependencies like `brace-expansion` into `devDependencies` and add a dedicated `pnpm package` script for VSIX builds
+- Refresh README and AGENTS.md to document the current build, test, and packaging workflow
+
+### Fixed
+
+- Exclude test output, local environment files, workspace metadata, and other dev-only assets from published VSIX packages
+- Add publishing tests so package contents and publish workflow stay aligned
+
 ## [0.0.2] - 2026-03-14
 
 ### Added

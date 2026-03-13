@@ -166,12 +166,18 @@ Path traversal is blocked. Inputs like `../../etc/passwd` that resolve outside t
 
 ```sh
 pnpm install
-pnpm compile      # Bundle the extension and compile tests
-pnpm watch        # Rebuild the extension bundle in watch mode
+pnpm bundle        # Bundle the extension to out/
+pnpm compile:tests # Compile tests to out-test/
+pnpm compile       # Bundle the extension and compile tests
+pnpm watch         # Rebuild the extension bundle in watch mode
+pnpm watch:tests   # Recompile tests in watch mode
 pnpm lint         # Lint and format check (Biome)
-pnpm test         # Compile, lint, and run tests
-pnpm typecheck    # Type check without emitting
+pnpm test          # Bundle, compile tests, and run the VS Code test suite
+pnpm package       # Build a VSIX without bundled dev/test files
+pnpm typecheck     # Type check without emitting
 ```
+
+Packaging uses the Rolldown bundle in `out/`, keeps test artifacts in `out-test/`, and excludes local env files plus other development-only assets from the published VSIX.
 
 ## License
 

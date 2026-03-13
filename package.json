@@ -2,7 +2,7 @@
   "name": "newf",
   "displayName": "Newf",
   "description": "Create new files and folders from the command palette with brace expansion and templates.",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "publisher": "kazuito",
   "license": "MIT",
   "icon": "./icon.png",
