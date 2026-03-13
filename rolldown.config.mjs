@@ -18,7 +18,8 @@ export default defineConfig({
     dir: "out",
     entryFileNames: "extension.js",
     format: "cjs",
-    sourcemap: true,
+    minify: true,
+    sourcemap: false,
   },
   external,
 });
