@@ -1,8 +1,8 @@
-# newf
+# Newf
 
 Create new files and folders from the command palette. Fast, with brace expansion.
 
----
+![Demo](./demo.gif)
 
 ## Installation
 
