@@ -1,6 +1,6 @@
 {
 	"name": "newf",
-	"displayName": "newf",
+	"displayName": "Newf",
 	"description": "Create new files and folders from the command palette. Fast, with brace expansion.",
 	"version": "0.0.1",
 	"publisher": "kazuito",
@@ -30,12 +30,12 @@
 	"contributes": {
 		"commands": [
 			{
-				"command": "newf.create",
+				"command": "newf.newFile",
 				"title": "Create New File",
 				"category": "Newf"
 			},
 			{
-				"command": "newf.createAtRoot",
+				"command": "newf.newFileAtRoot",
 				"title": "Create New File at Path",
 				"category": "Newf"
 			}
@@ -43,7 +43,7 @@
 		"menus": {
 			"explorer/context": [
 				{
-					"command": "newf.create",
+					"command": "newf.newFile",
 					"when": "explorerResourceIsFolder",
 					"group": "navigation"
 				}

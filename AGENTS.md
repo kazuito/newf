@@ -3,8 +3,8 @@
 ## Project overview
 
 **newf** is a VS Code extension that lets users quickly create new files and folders from the command palette. It registers two commands:
-- `newf.create` — "Create New File": pick a directory, then type a file name/pattern
-- `newf.createAtRoot` — "Create New File at Path": skip the directory picker, type a path relative to workspace root
+- `newf.newFile` — "Create New File": pick a directory, then type a file name/pattern
+- `newf.newFileAtRoot` — "Create New File at Path": skip the directory picker, type a path relative to workspace root
 
 Both commands support brace expansion (e.g. `{a,b}.md`, `{01..05}.md`).
 
@@ -42,7 +42,7 @@ pnpm typecheck # Check types (Run after make changes)
 
 ## How the extension works
 
-### `newf.create` (Create New File)
+### `newf.newFile` (Create New File)
 1. Validates that a workspace is open.
 2. Loads the directory list via `getDirectories()` (git-aware, falls back to filesystem walk).
 3. Shows a `createQuickPick` with the active file's directory pre-selected.
@@ -51,7 +51,7 @@ pnpm typecheck # Check types (Run after make changes)
 
 When invoked from the Explorer right-click context menu on a folder, receives a `contextUri` and skips the directory picker.
 
-### `newf.createAtRoot` (Create New File at Path)
+### `newf.newFileAtRoot` (Create New File at Path)
 Same as above but skips the directory picker entirely — paths are resolved from the workspace root.
 
 ### Shared helpers (in `extension.ts`)
