@@ -4,6 +4,21 @@ All notable changes to the "newf" extension will be documented in this file.
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.0.2] - 2026-03-14
+
+### Added
+
+- File templates via `newf.templates`, including `${name}`, `${basename}`, `${ext}`, `${dir}`, `${workspaceFolder}`, and `${date}` placeholders
+- `newf.openAfterCreate` setting to open the last created file, all created files, or none
+- Workspace root selection when multiple folders are open
+- Inline directory creation from the directory picker
+- Localization for commands, prompts, validation messages, and settings
+
+### Changed
+
+- Explorer context actions now work from both folders and files, using the file's parent directory when needed
+- Validation previews now distinguish files and folders and show a short path preview for multi-create patterns
+
 ## [0.0.1] - 2026-03-13
 
 ### Added

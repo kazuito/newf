@@ -1,7 +1,7 @@
 {
 	"name": "newf",
 	"displayName": "Newf",
-	"description": "Create new files and folders from the command palette. Fast, with brace expansion.",
+	"description": "Create new files and folders from the command palette with brace expansion and templates.",
 	"version": "0.0.2",
 	"publisher": "kazuito",
 	"license": "MIT",
@@ -15,8 +15,12 @@
 	},
 	"keywords": [
 		"file",
+		"folder",
 		"new file",
+		"new folder",
 		"create file",
+		"create folder",
+		"template",
 		"brace expansion",
 		"command palette"
 	],
