@@ -1,117 +1,123 @@
 {
-	"name": "newf",
-	"displayName": "Newf",
-	"description": "Create new files and folders from the command palette with brace expansion and templates.",
-	"version": "0.0.2",
-	"publisher": "kazuito",
-	"license": "MIT",
-	"icon": "./icon.png",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/kazuito/newf"
-	},
-	"bugs": {
-		"url": "https://github.com/kazuito/newf/issues"
-	},
-	"keywords": [
-		"file",
-		"folder",
-		"new file",
-		"new folder",
-		"create file",
-		"create folder",
-		"template",
-		"brace expansion",
-		"command palette"
-	],
-	"engines": {
-		"vscode": "^1.100.0"
-	},
-	"categories": [
-		"Other"
-	],
-	"activationEvents": [],
-	"main": "./out/extension.js",
-	"l10n": "./l10n",
-	"contributes": {
-		"commands": [
-			{
-				"command": "newf.newFile",
-				"title": "%command.newFile.title%",
-				"category": "Newf"
-			},
-			{
-				"command": "newf.newFileAtRoot",
-				"title": "%command.newFileAtRoot.title%",
-				"category": "Newf"
-			}
-		],
-		"menus": {
-			"explorer/context": [
-				{
-					"command": "newf.newFile",
-					"when": "explorerResourceIsFolder",
-					"group": "navigation"
-				},
-				{
-					"command": "newf.newFile",
-					"when": "!explorerResourceIsFolder",
-					"group": "navigation"
-				}
-			]
-		},
-		"configuration": {
-			"title": "Newf",
-			"properties": {
-				"newf.templates": {
-					"type": "object",
-					"scope": "resource",
-					"default": {},
-					"description": "%config.templates.description%",
-					"additionalProperties": {
-						"type": "string"
-					}
-				},
-				"newf.openAfterCreate": {
-					"type": "string",
-					"enum": ["last", "all", "none"],
-					"enumDescriptions": [
-						"%config.openAfterCreate.last%",
-						"%config.openAfterCreate.all%",
-						"%config.openAfterCreate.none%"
-					],
-					"default": "last",
-					"description": "%config.openAfterCreate.description%"
-				}
-			}
-		}
-	},
-	"scripts": {
-		"vscode:prepublish": "pnpm run compile",
-		"compile": "tsc -p ./",
-		"watch": "tsc -watch -p ./",
-		"pretest": "pnpm run compile && pnpm run lint",
-		"lint": "biome check",
-		"format": "biome format --write",
-		"test": "vscode-test",
-		"typecheck": "tsc --noEmit",
-		"extract": "vscode-l10n-dev export -o ./l10n src/**/*.ts",
-		"check": "pnpm biome check --write && pnpm compile && pnpm test",
-		"prepare": "husky"
-	},
-	"devDependencies": {
-		"@biomejs/biome": "2.4.6",
-		"@types/mocha": "^10.0.10",
-		"@types/node": "22.x",
-		"@types/vscode": "^1.100.0",
-		"@vscode/l10n-dev": "^0.0.35",
-		"@vscode/test-cli": "^0.0.12",
-		"@vscode/test-electron": "^2.5.2",
-		"husky": "^9.1.7",
-		"typescript": "^5.9.3"
-	},
-	"packageManager": "pnpm@10.32.1",
-	"dependencies": {
-		"brace-expansion": "^5.0.4"
-	}
+  "name": "newf",
+  "displayName": "Newf",
+  "description": "Create new files and folders from the command palette with brace expansion and templates.",
+  "version": "0.0.2",
+  "publisher": "kazuito",
+  "license": "MIT",
+  "icon": "./icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kazuito/newf"
+  },
+  "bugs": {
+    "url": "https://github.com/kazuito/newf/issues"
+  },
+  "keywords": [
+    "file",
+    "folder",
+    "new file",
+    "new folder",
+    "create file",
+    "create folder",
+    "template",
+    "brace expansion",
+    "command palette"
+  ],
+  "engines": {
+    "vscode": "^1.100.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "l10n": "./l10n",
+  "contributes": {
+    "commands": [
+      {
+        "command": "newf.newFile",
+        "title": "%command.newFile.title%",
+        "category": "Newf"
+      },
+      {
+        "command": "newf.newFileAtRoot",
+        "title": "%command.newFileAtRoot.title%",
+        "category": "Newf"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "newf.newFile",
+          "when": "explorerResourceIsFolder",
+          "group": "navigation"
+        },
+        {
+          "command": "newf.newFile",
+          "when": "!explorerResourceIsFolder",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Newf",
+      "properties": {
+        "newf.templates": {
+          "type": "object",
+          "scope": "resource",
+          "default": {},
+          "description": "%config.templates.description%",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "newf.openAfterCreate": {
+          "type": "string",
+          "enum": [
+            "last",
+            "all",
+            "none"
+          ],
+          "enumDescriptions": [
+            "%config.openAfterCreate.last%",
+            "%config.openAfterCreate.all%",
+            "%config.openAfterCreate.none%"
+          ],
+          "default": "last",
+          "description": "%config.openAfterCreate.description%"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "pnpm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "pnpm run compile && pnpm run lint",
+    "lint": "biome check",
+    "format": "biome format --write",
+    "test": "vscode-test",
+    "typecheck": "tsc --noEmit",
+    "extract": "vscode-l10n-dev export -o ./l10n src/**/*.ts",
+    "check": "pnpm biome check --write && pnpm compile && pnpm test",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.4.6",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "@types/vscode": "^1.100.0",
+    "@vscode/l10n-dev": "^0.0.35",
+    "@vscode/test-cli": "^0.0.12",
+    "@vscode/test-electron": "^2.5.2",
+    "husky": "^9.1.7",
+    "typescript": "^5.9.3"
+  },
+  "packageManager": "pnpm@10.32.1",
+  "dependencies": {
+    "brace-expansion": "^5.0.4"
+  }
 }

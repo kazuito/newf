@@ -1,9 +1,9 @@
 {
-	"command.newFile.title": "Vytvořit nový soubor",
-	"command.newFileAtRoot.title": "Vytvořit nový soubor na cestě",
-	"config.templates.description": "Mapuje jednoduché vzory glob na počáteční obsah souboru. Použijte ${name} pro kmen souboru (základní název bez přípony). Available variables: ${name}, ${basename}, ${ext}, ${dir}, ${workspaceFolder}, ${date}. Vzory bez `/` odpovídají pouze základnímu názvu; vzory s `/` odpovídají cestě relativní k pracovnímu prostoru. Vyhraje první odpovídající vzor. Podporuje `*` (v rámci jednoho segmentu cesty) a `**` (mezi segmenty).",
-	"config.openAfterCreate.description": "Které soubory otevřít v editoru po vytvoření.",
-	"config.openAfterCreate.last": "Otevřít poslední vytvořený soubor",
-	"config.openAfterCreate.all": "Otevřít všechny vytvořené soubory",
-	"config.openAfterCreate.none": "Neotevírat žádné soubory"
+  "command.newFile.title": "Vytvořit nový soubor",
+  "command.newFileAtRoot.title": "Vytvořit nový soubor na cestě",
+  "config.templates.description": "Mapuje jednoduché vzory glob na počáteční obsah souboru. Použijte ${name} pro kmen souboru (základní název bez přípony). Available variables: ${name}, ${basename}, ${ext}, ${dir}, ${workspaceFolder}, ${date}. Vzory bez `/` odpovídají pouze základnímu názvu; vzory s `/` odpovídají cestě relativní k pracovnímu prostoru. Vyhraje první odpovídající vzor. Podporuje `*` (v rámci jednoho segmentu cesty) a `**` (mezi segmenty).",
+  "config.openAfterCreate.description": "Které soubory otevřít v editoru po vytvoření.",
+  "config.openAfterCreate.last": "Otevřít poslední vytvořený soubor",
+  "config.openAfterCreate.all": "Otevřít všechny vytvořené soubory",
+  "config.openAfterCreate.none": "Neotevírat žádné soubory"
 }

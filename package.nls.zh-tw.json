@@ -1,9 +1,9 @@
 {
-	"command.newFile.title": "建立新檔案",
-	"command.newFileAtRoot.title": "在路徑中建立新檔案",
-	"config.templates.description": "將簡單的 glob 模式對應至檔案的初始內容。使用 ${name} 表示檔案主幹（不含副檔名的基本名稱）。可用變數：${name}、${basename}、${ext}、${dir}、${workspaceFolder}、${date}。不含 `/` 的模式僅符合基本名稱；含 `/` 的模式符合工作區相對路徑。第一個符合的模式獲勝。支援 `*`（在單一路徑區段內）和 `**`（跨區段）。",
-	"config.openAfterCreate.description": "建立後要在編輯器中開啟哪些檔案。",
-	"config.openAfterCreate.last": "開啟最後建立的檔案",
-	"config.openAfterCreate.all": "開啟所有建立的檔案",
-	"config.openAfterCreate.none": "不開啟任何檔案"
+  "command.newFile.title": "建立新檔案",
+  "command.newFileAtRoot.title": "在路徑中建立新檔案",
+  "config.templates.description": "將簡單的 glob 模式對應至檔案的初始內容。使用 ${name} 表示檔案主幹（不含副檔名的基本名稱）。可用變數：${name}、${basename}、${ext}、${dir}、${workspaceFolder}、${date}。不含 `/` 的模式僅符合基本名稱；含 `/` 的模式符合工作區相對路徑。第一個符合的模式獲勝。支援 `*`（在單一路徑區段內）和 `**`（跨區段）。",
+  "config.openAfterCreate.description": "建立後要在編輯器中開啟哪些檔案。",
+  "config.openAfterCreate.last": "開啟最後建立的檔案",
+  "config.openAfterCreate.all": "開啟所有建立的檔案",
+  "config.openAfterCreate.none": "不開啟任何檔案"
 }

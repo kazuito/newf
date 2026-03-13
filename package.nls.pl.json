@@ -1,9 +1,9 @@
 {
-	"command.newFile.title": "Utwórz nowy plik",
-	"command.newFileAtRoot.title": "Utwórz nowy plik pod ścieżką",
-	"config.templates.description": "Mapuje proste wzorce glob na początkową zawartość pliku. Użyj ${name} dla rdzenia pliku (nazwy bazowej bez rozszerzenia). Available variables: ${name}, ${basename}, ${ext}, ${dir}, ${workspaceFolder}, ${date}. Wzorce bez `/` dopasowują tylko nazwę bazową; wzorce z `/` dopasowują ścieżkę względną obszaru roboczego. Wygrywa pierwszy pasujący wzorzec. Obsługuje `*` (w obrębie jednego segmentu ścieżki) i `**` (między segmentami).",
-	"config.openAfterCreate.description": "Które pliki otworzyć w edytorze po utworzeniu.",
-	"config.openAfterCreate.last": "Otwórz ostatnio utworzony plik",
-	"config.openAfterCreate.all": "Otwórz wszystkie utworzone pliki",
-	"config.openAfterCreate.none": "Nie otwieraj żadnych plików"
+  "command.newFile.title": "Utwórz nowy plik",
+  "command.newFileAtRoot.title": "Utwórz nowy plik pod ścieżką",
+  "config.templates.description": "Mapuje proste wzorce glob na początkową zawartość pliku. Użyj ${name} dla rdzenia pliku (nazwy bazowej bez rozszerzenia). Available variables: ${name}, ${basename}, ${ext}, ${dir}, ${workspaceFolder}, ${date}. Wzorce bez `/` dopasowują tylko nazwę bazową; wzorce z `/` dopasowują ścieżkę względną obszaru roboczego. Wygrywa pierwszy pasujący wzorzec. Obsługuje `*` (w obrębie jednego segmentu ścieżki) i `**` (między segmentami).",
+  "config.openAfterCreate.description": "Które pliki otworzyć w edytorze po utworzeniu.",
+  "config.openAfterCreate.last": "Otwórz ostatnio utworzony plik",
+  "config.openAfterCreate.all": "Otwórz wszystkie utworzone pliki",
+  "config.openAfterCreate.none": "Nie otwieraj żadnych plików"
 }

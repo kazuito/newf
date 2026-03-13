@@ -1,9 +1,9 @@
 {
-	"command.newFile.title": "Crear nuevo archivo",
-	"command.newFileAtRoot.title": "Crear nuevo archivo en ruta",
-	"config.templates.description": "Asigna patrones glob simples al contenido inicial del archivo. Use ${name} para el nombre del archivo sin extensión. Available variables: ${name}, ${basename}, ${ext}, ${dir}, ${workspaceFolder}, ${date}. Los patrones sin `/` coinciden solo con el nombre base; los patrones con `/` coinciden con la ruta relativa al workspace. Gana el primer patrón coincidente. Admite `*` (dentro de un segmento de ruta) y `**` (entre segmentos).",
-	"config.openAfterCreate.description": "Qué archivos abrir en el editor después de la creación.",
-	"config.openAfterCreate.last": "Abrir el último archivo creado",
-	"config.openAfterCreate.all": "Abrir todos los archivos creados",
-	"config.openAfterCreate.none": "No abrir ningún archivo"
+  "command.newFile.title": "Crear nuevo archivo",
+  "command.newFileAtRoot.title": "Crear nuevo archivo en ruta",
+  "config.templates.description": "Asigna patrones glob simples al contenido inicial del archivo. Use ${name} para el nombre del archivo sin extensión. Available variables: ${name}, ${basename}, ${ext}, ${dir}, ${workspaceFolder}, ${date}. Los patrones sin `/` coinciden solo con el nombre base; los patrones con `/` coinciden con la ruta relativa al workspace. Gana el primer patrón coincidente. Admite `*` (dentro de un segmento de ruta) y `**` (entre segmentos).",
+  "config.openAfterCreate.description": "Qué archivos abrir en el editor después de la creación.",
+  "config.openAfterCreate.last": "Abrir el último archivo creado",
+  "config.openAfterCreate.all": "Abrir todos los archivos creados",
+  "config.openAfterCreate.none": "No abrir ningún archivo"
 }
