@@ -89,10 +89,10 @@
 		"pretest": "pnpm run compile && pnpm run lint",
 		"lint": "biome check",
 		"format": "biome format --write",
-		"check": "biome check --write",
 		"test": "vscode-test",
 		"typecheck": "tsc --noEmit",
 		"extract": "vscode-l10n-dev export -o ./l10n src/**/*.ts",
+		"check": "pnpm biome check --write && pnpm compile && pnpm test",
 		"prepare": "husky"
 	},
 	"devDependencies": {

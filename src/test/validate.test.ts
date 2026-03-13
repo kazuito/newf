@@ -46,6 +46,28 @@ suite("patternValidateInput", () => {
     assert.match(result.message, /\(\+5 more\)/);
   });
 
+  test("shows folder count for a single folder intent", () => {
+    const result = patternValidateInput("docs/");
+    assert.ok(result);
+    assert.strictEqual(result.severity, vscode.InputBoxValidationSeverity.Info);
+    assert.match(result.message, /Will create 1 folder: docs\//);
+  });
+
+  test("shows folder count for multiple folder intents", () => {
+    const result = patternValidateInput("{docs,notes}/");
+    assert.ok(result);
+    assert.match(result.message, /Will create 2 folders: docs\/, notes\//);
+  });
+
+  test("shows mixed file and folder counts", () => {
+    const result = patternValidateInput("README.md, docs/");
+    assert.ok(result);
+    assert.match(
+      result.message,
+      /Will create 2 items \(1 file, 1 folder\): README\.md, docs\//,
+    );
+  });
+
   test("returns error severity when expansion exceeds 100 files", () => {
     const result = patternValidateInput("{001..200}.txt");
     assert.ok(result);
