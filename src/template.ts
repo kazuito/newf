@@ -2,6 +2,14 @@ import * as path from "node:path";
 import * as vscode from "vscode";
 
 export type Templates = Record<string, string>;
+type TemplateVariableName =
+  | "basename"
+  | "date"
+  | "dir"
+  | "ext"
+  | "name"
+  | "workspaceFolder";
+type TemplateVariables = Record<TemplateVariableName, string>;
 
 function globToRegex(pattern: string): RegExp {
   let regexStr = "";
@@ -31,6 +39,42 @@ export function normalizeTemplatePath(input: string): string {
   return input.replace(/\\/g, "/");
 }
 
+function formatLocalDate(date: Date): string {
+  const year = String(date.getFullYear());
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+function getTemplateVariables(
+  relativePath: string,
+  workspaceFolder: string,
+  now: Date,
+): TemplateVariables {
+  const normalizedPath = normalizeTemplatePath(relativePath);
+  const basename = path.posix.basename(normalizedPath);
+  const ext = path.posix.extname(normalizedPath);
+
+  return {
+    basename,
+    date: formatLocalDate(now),
+    dir: path.posix.dirname(normalizedPath),
+    ext,
+    name: path.posix.basename(normalizedPath, ext),
+    workspaceFolder: normalizeTemplatePath(workspaceFolder),
+  };
+}
+
+function substituteTemplateVariables(
+  content: string,
+  variables: TemplateVariables,
+): string {
+  return content.replace(
+    /\$\{(basename|date|dir|ext|name|workspaceFolder)\}/g,
+    (_, key: TemplateVariableName) => variables[key],
+  );
+}
+
 /**
  * Returns the template content for a workspace-relative file path, or null
  * if no pattern matches. Patterns without `/` are matched against the
@@ -40,15 +84,17 @@ export function normalizeTemplatePath(input: string): string {
 export function resolveTemplate(
   relativePath: string,
   templates: Templates,
+  workspaceFolder: string,
+  now = new Date(),
 ): string | null {
   const normalized = normalizeTemplatePath(relativePath);
-  const stem = path.basename(normalized, path.extname(normalized));
-  const basename = path.basename(normalized);
+  const basename = path.posix.basename(normalized);
+  const variables = getTemplateVariables(normalized, workspaceFolder, now);
 
   for (const [pattern, content] of Object.entries(templates)) {
     const target = pattern.includes("/") ? normalized : basename;
     if (globToRegex(pattern).test(target)) {
-      return content.replace(/\$\{name\}/g, stem);
+      return substituteTemplateVariables(content, variables);
     }
   }
   return null;

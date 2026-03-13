@@ -1,7 +1,7 @@
 {
 	"command.newFile.title": "创建新文件",
 	"command.newFileAtRoot.title": "在路径中创建新文件",
-	"config.templates.description": "将简单的 glob 模式映射到文件的初始内容。使用 ${name} 表示文件主干（不含扩展名的基本名称）。不含 `/` 的模式仅匹配基本名称；含 `/` 的模式匹配工作区相对路径。第一个匹配的模式获胜。支持 `*`（在单个路径段内）和 `**`（跨段）。",
+	"config.templates.description": "将简单的 glob 模式映射到文件的初始内容。使用 ${name} 表示文件主干（不含扩展名的基本名称）。可用变量：${name}、${basename}、${ext}、${dir}、${workspaceFolder}、${date}。不含 `/` 的模式仅匹配基本名称；含 `/` 的模式匹配工作区相对路径。第一个匹配的模式获胜。支持 `*`（在单个路径段内）和 `**`（跨段）。",
 	"config.openAfterCreate.description": "创建后在编辑器中打开哪些文件。",
 	"config.openAfterCreate.last": "打开最后创建的文件",
 	"config.openAfterCreate.all": "打开所有创建的文件",

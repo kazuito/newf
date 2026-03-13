@@ -1,7 +1,7 @@
 {
 	"command.newFile.title": "Create New File",
 	"command.newFileAtRoot.title": "Create New File at Path",
-	"config.templates.description": "Map simple glob patterns to initial file content. Use ${name} for the file stem (basename without extension). Patterns without `/` match the basename only; patterns with `/` match the workspace-relative path. First matching pattern wins. Supports `*` (within one path segment) and `**` (across segments).",
+	"config.templates.description": "Map simple glob patterns to initial file content. Available variables: ${name} (file stem without the final extension), ${basename} (full filename), ${ext} (final extension including the leading `.`), ${dir} (workspace-relative parent directory, or `.`), ${workspaceFolder} (absolute workspace root path), and ${date} (local date in YYYY-MM-DD). Patterns without `/` match the basename only; patterns with `/` match the workspace-relative path. First matching pattern wins. Supports `*` (within one path segment) and `**` (across segments).",
 	"config.openAfterCreate.description": "Which files to open in the editor after creation.",
 	"config.openAfterCreate.last": "Open the last created file",
 	"config.openAfterCreate.all": "Open all created files",

@@ -1,7 +1,7 @@
 {
 	"command.newFile.title": "Neue Datei erstellen",
 	"command.newFileAtRoot.title": "Neue Datei unter Pfad erstellen",
-	"config.templates.description": "Ordnet einfache Glob-Muster dem anfänglichen Dateiinhalt zu. Verwenden Sie ${name} für den Dateinamen ohne Erweiterung. Muster ohne `/` werden nur mit dem Basisnamen abgeglichen; Muster mit `/` mit dem workspace-relativen Pfad. Das erste passende Muster gewinnt. Unterstützt `*` (innerhalb eines Pfadsegments) und `**` (über Segmente hinweg).",
+	"config.templates.description": "Ordnet einfache Glob-Muster dem anfänglichen Dateiinhalt zu. Verwenden Sie ${name} für den Dateinamen ohne Erweiterung. Available variables: ${name}, ${basename}, ${ext}, ${dir}, ${workspaceFolder}, ${date}. Muster ohne `/` werden nur mit dem Basisnamen abgeglichen; Muster mit `/` mit dem workspace-relativen Pfad. Das erste passende Muster gewinnt. Unterstützt `*` (innerhalb eines Pfadsegments) und `**` (über Segmente hinweg).",
 	"config.openAfterCreate.description": "Welche Dateien nach der Erstellung im Editor geöffnet werden sollen.",
 	"config.openAfterCreate.last": "Zuletzt erstellte Datei öffnen",
 	"config.openAfterCreate.all": "Alle erstellten Dateien öffnen",

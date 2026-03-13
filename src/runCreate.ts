@@ -57,7 +57,7 @@ export async function runCreate(
         const relativePath = normalizeTemplatePath(
           path.relative(workspaceRoot, absolutePath),
         );
-        content = resolveTemplate(relativePath, templates) ?? "";
+        content = resolveTemplate(relativePath, templates, workspaceRoot) ?? "";
       }
       const result = await createFile(basePath, raw, content);
       if (result.isDirectory) {

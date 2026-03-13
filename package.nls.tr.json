@@ -1,7 +1,7 @@
 {
 	"command.newFile.title": "Yeni Dosya Oluştur",
 	"command.newFileAtRoot.title": "Yolda Yeni Dosya Oluştur",
-	"config.templates.description": "Basit glob desenlerini başlangıç dosyası içeriğiyle eşleştirir. Dosya adı (uzantısız taban adı) için ${name} kullanın. `/` içermeyen desenler yalnızca taban adıyla eşleşir; `/` içeren desenler ise workspace'e göreli yolla eşleşir. İlk eşleşen desen kazanır. `*` (tek yol segmenti içinde) ve `**` (segmentler arasında) desteklenir.",
+	"config.templates.description": "Basit glob desenlerini başlangıç dosyası içeriğiyle eşleştirir. Dosya adı (uzantısız taban adı) için ${name} kullanın. Available variables: ${name}, ${basename}, ${ext}, ${dir}, ${workspaceFolder}, ${date}. `/` içermeyen desenler yalnızca taban adıyla eşleşir; `/` içeren desenler ise workspace'e göreli yolla eşleşir. İlk eşleşen desen kazanır. `*` (tek yol segmenti içinde) ve `**` (segmentler arasında) desteklenir.",
 	"config.openAfterCreate.description": "Oluşturulduktan sonra düzenleyicide hangi dosyaların açılacağı.",
 	"config.openAfterCreate.last": "En son oluşturulan dosyayı aç",
 	"config.openAfterCreate.all": "Oluşturulan tüm dosyaları aç",

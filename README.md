@@ -17,15 +17,7 @@ Fast, minimal, with full brace expansion.
 
 ## Installation
 
-### Click to install
-
-[![Open in VSCode](https://img.shields.io/badge/Open%20in%20VSCode-0078D4?style=for-the-badge&logo=download)](vscode:extension/kazuito.newf)
-&nbsp;
-[![Visit Visual Studio Marketplace](https://img.shields.io/badge/Visit%20Marketplace-000?style=for-the-badge)](https://marketplace.visualstudio.com/items?itemName=kazuito.newf)
-
-### Manual install
-
-Search for **newf** in the VS Code extension marketplace, or install from the command line:
+Search for **Newf** in the extensions tab on VSCode, or install from the command line:
 
 ```sh
 code --install-extension kazuito.newf
@@ -85,11 +77,20 @@ There is a safety limit of 100 expanded files per command.
 
 ## File Templates
 
-Automatically seed new files with starter content using the `newf.templates` setting. Map simple glob patterns to template strings — `${name}` expands to the file's stem (basename without extension).
+Automatically seed new files with starter content using the `newf.templates` setting. Map simple glob patterns to template strings.
+
+Available template variables:
+- `${name}`: file stem without the final extension
+- `${basename}`: full filename including extension
+- `${ext}`: final extension including the leading `.`
+- `${dir}`: parent directory relative to the workspace root, or `.`
+- `${workspaceFolder}`: absolute path to the selected workspace root
+- `${date}`: local date in `YYYY-MM-DD`
 
 ```json
 "newf.templates": {
   "*.tsx": "export default function ${name}() {\n  return <div />;\n}\n",
+  "*.md": "---\ntitle: ${name}\ndate: ${date}\npath: ${dir}/${basename}\nworkspace: ${workspaceFolder}\n---\n",
   "*.test.ts": "import { describe, it } from 'node:test';\n\n",
   "src/**/*.ts": "// ${name}\n"
 }
@@ -118,7 +119,7 @@ Path traversal is blocked. Inputs like `../../etc/passwd` that resolve outside t
 
 ## Requirements
 
-- VS Code 1.100.0 or later
+- VSCode 1.100.0 or later
 
 ## Development
 

@@ -1,7 +1,7 @@
 {
 	"command.newFile.title": "新規ファイルを作成",
 	"command.newFileAtRoot.title": "パスに新規ファイルを作成",
-	"config.templates.description": "シンプルな glob パターンをファイルの初期コンテンツにマッピングします。ファイルのステム（拡張子なしのベース名）には ${name} を使用してください。`/` のないパターンはベース名のみに一致し、`/` のあるパターンはワークスペース相対パスに一致します。最初に一致したパターンが優先されます。`*`（1 つのパスセグメント内）および `**`（セグメントをまたぐ）をサポートします。",
+	"config.templates.description": "シンプルな glob パターンをファイルの初期コンテンツにマッピングします。ファイルのステム（拡張子なしのベース名）には ${name} を使用してください。使用できる変数: ${name}, ${basename}, ${ext}, ${dir}, ${workspaceFolder}, ${date}。`/` のないパターンはベース名のみに一致し、`/` のあるパターンはワークスペース相対パスに一致します。最初に一致したパターンが優先されます。`*`（1 つのパスセグメント内）および `**`（セグメントをまたぐ）をサポートします。",
 	"config.openAfterCreate.description": "作成後にエディターで開くファイル。",
 	"config.openAfterCreate.last": "最後に作成されたファイルを開く",
 	"config.openAfterCreate.all": "作成されたすべてのファイルを開く",

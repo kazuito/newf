@@ -1,7 +1,7 @@
 {
 	"command.newFile.title": "새 파일 만들기",
 	"command.newFileAtRoot.title": "경로에 새 파일 만들기",
-	"config.templates.description": "간단한 glob 패턴을 파일의 초기 내용에 매핑합니다. 파일 스템(확장자 없는 기본 이름)에는 ${name}을 사용합니다. `/` 없는 패턴은 기본 이름만 일치하고, `/` 있는 패턴은 워크스페이스 상대 경로에 일치합니다. 첫 번째로 일치하는 패턴이 적용됩니다. `*`(한 경로 세그먼트 내)와 `**`(세그먼트 간)를 지원합니다.",
+	"config.templates.description": "간단한 glob 패턴을 파일의 초기 내용에 매핑합니다. 파일 스템(확장자 없는 기본 이름)에는 ${name}을 사용합니다. 사용 가능한 변수: ${name}, ${basename}, ${ext}, ${dir}, ${workspaceFolder}, ${date}. `/` 없는 패턴은 기본 이름만 일치하고, `/` 있는 패턴은 워크스페이스 상대 경로에 일치합니다. 첫 번째로 일치하는 패턴이 적용됩니다. `*`(한 경로 세그먼트 내)와 `**`(세그먼트 간)를 지원합니다.",
 	"config.openAfterCreate.description": "파일 생성 후 편집기에서 열 파일입니다.",
 	"config.openAfterCreate.last": "마지막으로 만든 파일 열기",
 	"config.openAfterCreate.all": "만든 파일 모두 열기",
