@@ -35,6 +35,22 @@
   ],
   "main": "./out/extension.js",
   "l10n": "./l10n",
+  "scripts": {
+    "vscode:prepublish": "pnpm run bundle",
+    "bundle": "rolldown -c",
+    "compile:tests": "tsc -p ./tsconfig.test.json",
+    "compile": "pnpm run bundle && pnpm run compile:tests",
+    "watch": "rolldown -c -w",
+    "watch:tests": "tsc -watch -p ./tsconfig.test.json",
+    "lint": "biome check",
+    "format": "biome format --write",
+    "test": "vscode-test",
+    "typecheck": "tsc --noEmit",
+    "check": "pnpm biome check --write && pnpm test",
+    "package": "vsce package --no-dependencies",
+    "pretest": "pnpm run compile",
+    "prepare": "husky"
+  },
   "contributes": {
     "commands": [
       {
@@ -91,22 +107,6 @@
         }
       }
     }
-  },
-  "scripts": {
-    "vscode:prepublish": "pnpm run bundle",
-    "bundle": "rolldown -c",
-    "compile:tests": "tsc -p ./tsconfig.test.json",
-    "compile": "pnpm run bundle && pnpm run compile:tests",
-    "watch": "rolldown -c -w",
-    "watch:tests": "tsc -watch -p ./tsconfig.test.json",
-    "lint": "biome check",
-    "format": "biome format --write",
-    "test": "vscode-test",
-    "typecheck": "tsc --noEmit",
-    "check": "pnpm biome check --write && pnpm test",
-    "package": "vsce package --no-dependencies",
-    "pretest": "pnpm run compile",
-    "prepare": "husky"
   },
   "devDependencies": {
     "brace-expansion": "^5.0.4",
