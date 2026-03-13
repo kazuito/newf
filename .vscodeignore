@@ -1,6 +1,5 @@
 .husky/
 .vscode-test/
-node_modules/
 out/test/
 src/
 AGENTS.md
@@ -8,3 +7,4 @@ CLAUDE.md
 biome.json
 pnpm-lock.yaml
 tsconfig.json
+demo.gif
