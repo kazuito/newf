@@ -2,7 +2,7 @@ import * as vscode from "vscode";
 import { runCreate } from "../runCreate";
 import { patternValidateInput } from "../validate";
 
-export async function createFileAtRootCommand() {
+export async function newFileAtRootCommand() {
   const workspaceFolders = vscode.workspace.workspaceFolders;
   if (!workspaceFolders || workspaceFolders.length === 0) {
     vscode.window.showErrorMessage("No workspace folder is open.");

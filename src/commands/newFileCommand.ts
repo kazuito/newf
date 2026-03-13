@@ -36,7 +36,7 @@ async function pickDirectory(
   });
 }
 
-export async function createFileCommand(contextUri?: vscode.Uri) {
+export async function newFileCommand(contextUri?: vscode.Uri) {
   const workspaceFolders = vscode.workspace.workspaceFolders;
   if (!workspaceFolders || workspaceFolders.length === 0) {
     vscode.window.showErrorMessage("No workspace folder is open.");
