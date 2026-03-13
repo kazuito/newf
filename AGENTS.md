@@ -11,7 +11,7 @@ Both commands support brace expansion (e.g. `{a,b}.md`, `{01..05}.md`).
 ## Tech stack
 
 - TypeScript, targeting ES2022
-- VS Code Extension API (^1.110.0)
+- VS Code Extension API (^1.100.0)
 - Node.js built-in modules (`node:fs`, `node:path`)
 - Package manager: **pnpm**
 

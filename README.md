@@ -76,7 +76,7 @@ Path traversal is blocked. Inputs like `../../etc/passwd` that resolve outside t
 
 ## Requirements
 
-- VS Code 1.110.0 or later
+- VS Code 1.100.0 or later
 
 ## Development
 
