@@ -7,11 +7,11 @@
 **Create new files and folders from the command palette.** \
 Fast, minimal, with brace expansion and templates.
 
-[![Install on VSCode](https://img.shields.io/visual-studio-marketplace/i/kazuito.newf?style=for-the-badge&label=Install%20on%20VSCode&labelColor=000&color=000)](https://marketplace.visualstudio.com/items?itemName=kazuito.newf)
+[![Install on VSCode](https://img.shields.io/badge/Install%20on%20VSCode-0078D4?style=for-the-badge)](https://marketplace.visualstudio.com/items?itemName=kazuito.newf)
 &nbsp;
 [![GitHub Repo stars](https://img.shields.io/github/stars/kazuito/newf?style=for-the-badge&logo=github&labelColor=000&color=000)](https://github.com/kazuito/newf)
 
-![Demo](./demo.gif)
+![Demo](https://raw.githubusercontent.com/kazuito/newf/refs/heads/main/demo.gif)
 
 </div>
 
