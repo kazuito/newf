@@ -34,5 +34,25 @@ suite("Publishing", () => {
       packageJson.scripts.compile,
       "pnpm run bundle && pnpm run compile:tests",
     );
+    assert.strictEqual(
+      packageJson.scripts.package,
+      "vsce package --no-dependencies",
+    );
+  });
+
+  test("bundled runtime dependencies stay out of package.json dependencies", () => {
+    const packageJson = JSON.parse(readProjectFile("package.json")) as {
+      dependencies?: Record<string, string>;
+      devDependencies?: Record<string, string>;
+    };
+
+    assert.strictEqual(
+      packageJson.dependencies?.["brace-expansion"],
+      undefined,
+    );
+    assert.strictEqual(
+      packageJson.devDependencies?.["brace-expansion"],
+      "^5.0.4",
+    );
   });
 });

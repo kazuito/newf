@@ -7,10 +7,6 @@ settings:
 importers:
 
   .:
-    dependencies:
-      brace-expansion:
-        specifier: ^5.0.4
-        version: 5.0.4
     devDependencies:
       '@biomejs/biome':
         specifier: 2.4.6
@@ -33,6 +29,9 @@ importers:
       '@vscode/test-electron':
         specifier: ^2.5.2
         version: 2.5.2
+      brace-expansion:
+        specifier: ^5.0.4
+        version: 5.0.4
       husky:
         specifier: ^9.1.7
         version: 9.1.7
