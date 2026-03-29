@@ -13,7 +13,7 @@ function formatCount(count: number, singular: string, plural: string): string {
 
 function buildSummary(files: number, folders: number): string | null {
   if (folders === 0) {
-    return files > 1 ? formatCount(files, "file", "files") : null;
+    return formatCount(files, "file", "files");
   }
   if (files === 0) {
     return formatCount(folders, "folder", "folders");

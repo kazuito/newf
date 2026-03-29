@@ -14,11 +14,7 @@ async function walkDirectories(
     withFileTypes: true,
   });
   for (const entry of entries) {
-    if (
-      entry.isDirectory() &&
-      !entry.name.startsWith(".") &&
-      entry.name !== "node_modules"
-    ) {
+    if (entry.isDirectory() && entry.name !== "node_modules") {
       const fullPath = path.join(currentPath, entry.name);
       const relativePath = path.relative(rootPath, fullPath);
       dirs.add(relativePath);
@@ -56,9 +52,7 @@ export async function getDirectories(rootPath: string): Promise<string[]> {
       // Add the directory and all parent directories
       let current = filePath;
       while (current && current !== ".") {
-        if (!current.startsWith(".")) {
-          dirs.add(current);
-        }
+        dirs.add(current);
         current = path.dirname(current);
       }
     }
