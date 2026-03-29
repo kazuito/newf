@@ -154,7 +154,10 @@ export async function newFileCommand(contextUri?: vscode.Uri) {
     const rel = path.relative(rootPath, targetPath);
     selectedDir = rel || ".";
   } else {
-    const dirs = await getDirectories(rootPath);
+    const respectGitignore = vscode.workspace
+      .getConfiguration("newf")
+      .get<boolean>("respectGitignore", true);
+    const dirs = await getDirectories(rootPath, respectGitignore);
     const picked = await pickDirectory(rootPath, dirs);
     if (!picked) return;
     selectedDir = picked;

@@ -1,9 +1,8 @@
-import { execFile } from "node:child_process";
 import * as fs from "node:fs";
 import * as path from "node:path";
-import { promisify } from "node:util";
+import ignore, { type Ignore } from "ignore";
 
-const execFileAsync = promisify(execFile);
+const SKIP_DIRS = new Set([".git", "node_modules"]);
 
 async function walkDirectories(
   rootPath: string,
@@ -14,53 +13,66 @@ async function walkDirectories(
     withFileTypes: true,
   });
   for (const entry of entries) {
-    if (entry.isDirectory() && entry.name !== "node_modules") {
-      const fullPath = path.join(currentPath, entry.name);
-      const relativePath = path.relative(rootPath, fullPath);
-      dirs.add(relativePath);
-      await walkDirectories(rootPath, fullPath, dirs);
-    }
+    if (!entry.isDirectory() || SKIP_DIRS.has(entry.name)) continue;
+    const fullPath = path.join(currentPath, entry.name);
+    const relativePath = path.relative(rootPath, fullPath);
+    dirs.add(relativePath);
+    await walkDirectories(rootPath, fullPath, dirs);
   }
 }
 
-export async function getDirectories(rootPath: string): Promise<string[]> {
-  const dirs = new Set<string>();
-  dirs.add(".");
+type IgnoreEntry = { relDir: string; ig: Ignore };
 
+async function walkWithIgnore(
+  rootPath: string,
+  currentPath: string,
+  dirs: Set<string>,
+  parentIgnores: IgnoreEntry[],
+): Promise<void> {
+  const relCurrentDir = path.relative(rootPath, currentPath);
+  const igs = [...parentIgnores];
   try {
-    // Use git to list all non-ignored directories
-    const { stdout } = await execFileAsync(
-      "git",
-      ["ls-files", "--others", "--cached", "--directory", "--exclude-standard"],
-      { cwd: rootPath, maxBuffer: 10 * 1024 * 1024, timeout: 10_000 },
+    const content = await fs.promises.readFile(
+      path.join(currentPath, ".gitignore"),
+      "utf-8",
     );
-
-    for (const line of stdout.split("\n")) {
-      const trimmed = line.trim();
-      if (!trimmed) {
-        continue;
-      }
-
-      // Collect every directory segment in the path
-      const filePath = trimmed.endsWith("/")
-        ? trimmed.slice(0, -1)
-        : path.dirname(trimmed);
-      if (filePath === ".") {
-        continue;
-      }
-
-      // Add the directory and all parent directories
-      let current = filePath;
-      while (current && current !== ".") {
-        dirs.add(current);
-        current = path.dirname(current);
-      }
-    }
+    igs.push({ relDir: relCurrentDir, ig: ignore().add(content) });
   } catch {
-    // Fallback: not a git repo, walk the filesystem
-    await walkDirectories(rootPath, rootPath, dirs);
+    // no .gitignore here
   }
 
+  const entries = await fs.promises.readdir(currentPath, {
+    withFileTypes: true,
+  });
+  for (const entry of entries) {
+    if (!entry.isDirectory() || SKIP_DIRS.has(entry.name)) continue;
+
+    const fullPath = path.join(currentPath, entry.name);
+    const relFromRoot = path.relative(rootPath, fullPath);
+
+    const isIgnored = igs.some(({ relDir, ig }) => {
+      const rel =
+        relDir === "" ? relFromRoot : path.relative(relDir, relFromRoot);
+      return ig.ignores(rel) || ig.ignores(`${rel}/`);
+    });
+    if (isIgnored) continue;
+
+    dirs.add(relFromRoot);
+    await walkWithIgnore(rootPath, fullPath, dirs, igs);
+  }
+}
+
+export async function getDirectories(
+  rootPath: string,
+  respectGitignore = true,
+): Promise<string[]> {
+  const dirs = new Set<string>();
+  dirs.add(".");
+  if (respectGitignore) {
+    await walkWithIgnore(rootPath, rootPath, dirs, []);
+  } else {
+    await walkDirectories(rootPath, rootPath, dirs);
+  }
   return [...dirs].sort();
 }
 

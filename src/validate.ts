@@ -30,6 +30,7 @@ export const patternValidateInput = (value: string) => {
   if (!value.trim()) return null;
   try {
     const names = expandInput(value);
+    if (names.length === 1 && !isDirectoryIntent(names[0])) return null;
     const folders = names.filter(isDirectoryIntent).length;
     const files = names.length - folders;
     const summary = buildSummary(files, folders);

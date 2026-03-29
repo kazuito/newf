@@ -111,7 +111,11 @@ export async function runCreate(
     );
   }
 
-  if (created.length > 0 || createdDirs.length > 0) {
+  const notifyOnCreate = vscode.workspace
+    .getConfiguration("newf")
+    .get<boolean>("notifyOnCreate", true);
+
+  if (notifyOnCreate && (created.length > 0 || createdDirs.length > 0)) {
     const parts: string[] = [];
     if (created.length === 1) {
       parts.push(vscode.l10n.t("Created {0}", path.basename(created[0])));

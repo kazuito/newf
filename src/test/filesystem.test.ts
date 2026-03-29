@@ -1,12 +1,8 @@
 import * as assert from "node:assert";
-import { execFile } from "node:child_process";
 import * as fs from "node:fs";
 import * as os from "node:os";
 import * as path from "node:path";
-import { promisify } from "node:util";
 import { createFile, getDirectories } from "../filesystem";
-
-const execFileAsync = promisify(execFile);
 
 function makeTmpDir(): string {
   return fs.mkdtempSync(path.join(os.tmpdir(), "newf-test-"));
@@ -140,52 +136,38 @@ suite("createFile", () => {
 });
 
 suite("getDirectories", () => {
-  suite("git mode", () => {
+  suite("respectGitignore (default)", () => {
     let tmpDir: string;
 
-    setup(async () => {
+    setup(() => {
       tmpDir = makeTmpDir();
-      await execFileAsync("git", ["init"], { cwd: tmpDir });
-      await execFileAsync("git", ["config", "user.email", "test@test.com"], {
-        cwd: tmpDir,
-      });
-      await execFileAsync("git", ["config", "user.name", "Test"], {
-        cwd: tmpDir,
-      });
 
-      // Create tracked files in various directories
       fs.mkdirSync(path.join(tmpDir, "src", "utils"), { recursive: true });
       fs.writeFileSync(path.join(tmpDir, "src", "index.ts"), "");
       fs.writeFileSync(path.join(tmpDir, "src", "utils", "helper.ts"), "");
 
-      // Create a hidden directory (should be excluded)
       fs.mkdirSync(path.join(tmpDir, ".hidden"), { recursive: true });
       fs.writeFileSync(path.join(tmpDir, ".hidden", "secret.txt"), "");
 
-      // Create a gitignored directory
       fs.writeFileSync(path.join(tmpDir, ".gitignore"), "ignored/\n");
       fs.mkdirSync(path.join(tmpDir, "ignored"), { recursive: true });
       fs.writeFileSync(path.join(tmpDir, "ignored", "file.txt"), "");
-
-      await execFileAsync("git", ["add", "."], { cwd: tmpDir });
-      await execFileAsync("git", ["commit", "-m", "init"], { cwd: tmpDir });
     });
 
     teardown(() => {
       fs.rmSync(tmpDir, { recursive: true, force: true });
     });
 
-    test("returns tracked directories with parent segments", async () => {
+    test("returns directories with parent segments", async () => {
       const dirs = await getDirectories(tmpDir);
       assert.ok(dirs.includes("."));
       assert.ok(dirs.includes("src"));
       assert.ok(dirs.includes("src/utils"));
     });
 
-    test("excludes hidden directories", async () => {
+    test("includes dot directories", async () => {
       const dirs = await getDirectories(tmpDir);
-      const hasHidden = dirs.some((d) => d.startsWith(".") && d !== ".");
-      assert.strictEqual(hasHidden, false);
+      assert.ok(dirs.includes(".hidden"));
     });
 
     test("excludes gitignored directories", async () => {
@@ -199,9 +181,17 @@ suite("getDirectories", () => {
       const sorted = [...dirs].sort();
       assert.deepStrictEqual(dirs, sorted);
     });
+
+    test("respects nested .gitignore", async () => {
+      fs.mkdirSync(path.join(tmpDir, "src", "generated"), { recursive: true });
+      fs.writeFileSync(path.join(tmpDir, "src", ".gitignore"), "generated/\n");
+      const dirs = await getDirectories(tmpDir);
+      assert.ok(!dirs.includes("src/generated"));
+      assert.ok(dirs.includes("src"));
+    });
   });
 
-  suite("fallback mode (non-git)", () => {
+  suite("without gitignore (respectGitignore=false)", () => {
     let tmpDir: string;
 
     setup(() => {
@@ -213,6 +203,7 @@ suite("getDirectories", () => {
       fs.mkdirSync(path.join(tmpDir, "node_modules", "pkg"), {
         recursive: true,
       });
+      fs.writeFileSync(path.join(tmpDir, ".gitignore"), "alpha/\n");
     });
 
     teardown(() => {
@@ -220,21 +211,30 @@ suite("getDirectories", () => {
     });
 
     test("walks directories recursively", async () => {
-      const dirs = await getDirectories(tmpDir);
+      const dirs = await getDirectories(tmpDir, false);
       assert.ok(dirs.includes("alpha"));
       assert.ok(dirs.includes("alpha/beta"));
       assert.ok(dirs.includes("gamma"));
     });
 
-    test("excludes hidden directories and node_modules", async () => {
-      const dirs = await getDirectories(tmpDir);
-      assert.ok(!dirs.includes(".hidden"));
+    test("includes dot directories", async () => {
+      const dirs = await getDirectories(tmpDir, false);
+      assert.ok(dirs.includes(".hidden"));
+    });
+
+    test("excludes node_modules", async () => {
+      const dirs = await getDirectories(tmpDir, false);
       assert.ok(!dirs.includes("node_modules"));
       assert.ok(!dirs.includes("node_modules/pkg"));
     });
 
+    test("does not respect .gitignore", async () => {
+      const dirs = await getDirectories(tmpDir, false);
+      assert.ok(dirs.includes("alpha"));
+    });
+
     test("result is sorted and includes dot", async () => {
-      const dirs = await getDirectories(tmpDir);
+      const dirs = await getDirectories(tmpDir, false);
       assert.strictEqual(dirs[0], ".");
       const sorted = [...dirs].sort();
       assert.deepStrictEqual(dirs, sorted);

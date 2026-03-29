@@ -90,6 +90,16 @@
             "type": "string"
           }
         },
+        "newf.respectGitignore": {
+          "type": "boolean",
+          "default": true,
+          "description": "%config.respectGitignore.description%"
+        },
+        "newf.notifyOnCreate": {
+          "type": "boolean",
+          "default": true,
+          "description": "%config.notifyOnCreate.description%"
+        },
         "newf.openAfterCreate": {
           "type": "string",
           "enum": [
@@ -109,7 +119,6 @@
     }
   },
   "devDependencies": {
-    "brace-expansion": "^5.0.4",
     "@biomejs/biome": "2.4.6",
     "@types/mocha": "^10.0.10",
     "@types/node": "22.x",
@@ -117,7 +126,9 @@
     "@vscode/l10n-dev": "^0.0.35",
     "@vscode/test-cli": "^0.0.12",
     "@vscode/test-electron": "^2.5.2",
+    "brace-expansion": "^5.0.4",
     "husky": "^9.1.7",
+    "ignore": "^7.0.5",
     "rolldown": "1.0.0-rc.9",
     "typescript": "^5.9.3"
   },
