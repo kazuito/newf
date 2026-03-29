@@ -12,6 +12,7 @@ const external = [
 export default defineConfig({
   input: "src/extension.ts",
   platform: "node",
+  treeshake: true,
   output: {
     cleanDir: true,
     codeSplitting: false,
