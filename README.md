@@ -179,6 +179,8 @@ pnpm typecheck     # Type check without emitting
 
 Packaging uses the Rolldown bundle in `out/`, keeps test artifacts in `out-test/`, and excludes local env files plus other development-only assets from the published VSIX.
 
+Run `pnpm check` to apply formatting fixes and run the full test suite in one step.
+
 ## License
 
 MIT

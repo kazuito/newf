@@ -88,7 +88,7 @@ When invoked from the Explorer context menu on a file, it uses the file's parent
 
 ### Shared helpers
 - `runCreate(workspaceRoot, basePath, input)` — expands patterns, applies templates, creates files/folders, respects `newf.openAfterCreate`, and offers undo for newly created files
-- `patternValidateInput` — `validateInput` callback that previews file/folder counts plus the first few expanded paths
+- `patternValidateInput` — `validateInput` callback that previews file/folder counts plus the first few expanded paths; returns `null` (no message) for a single plain file name, but still shows a message for a single folder intent (trailing `/`)
 - `createFile(basePath, rawFileName, content)` — creates files or folders, auto-creates parent directories, and blocks path traversal outside the base path
 - `resolveTemplate(relativePath, templates, workspaceFolder)` — first-match template lookup with `${name}`, `${basename}`, `${ext}`, `${dir}`, `${workspaceFolder}`, and `${date}` placeholders
 - `getDirectories(rootPath)` — uses `git ls-files` to respect `.gitignore`, falling back to a filesystem walk outside git repos

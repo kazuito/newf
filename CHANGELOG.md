@@ -4,6 +4,12 @@ All notable changes to the "newf" extension will be documented in this file.
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.0.5] - 2026-03-29
+
+### Fixed
+
+- Validation no longer shows an informational preview message when typing a single plain file name — the preview now only appears for multi-file patterns and single folder intents (trailing `/`)
+
 ## [0.0.4] - 2026-03-14
 
 ### Changed
